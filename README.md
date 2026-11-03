@@ -2,6 +2,8 @@
 
 <p align="center">
   <a href="https://github.com/BRAN-Org"><img src="https://img.shields.io/badge/BRAN%20Org-Open%20Data-blue.svg?logo=github" alt="BRAN Org"></a>
+  <a href="provenance.json"><img src="https://img.shields.io/badge/Identifica%C3%A7%C3%A3o-100%25-brightgreen.svg" alt="Identificação"></a>
+  <a href="schemas/article.v1.schema.json"><img src="https://img.shields.io/badge/Schema-article.v1-blue.svg" alt="Schema"></a>
   <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg" alt="BOAI Signatory"></a>
   <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg" alt="FAIR Principles"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Code-GPLv3-blue.svg" alt="GPLv3"></a>
