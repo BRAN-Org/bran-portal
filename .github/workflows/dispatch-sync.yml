@@ -20,7 +20,7 @@ jobs:
             echo "::warning::ORGANIZATION_SYNC_TOKEN não está configurado. O GITHUB_TOKEN padrão não tem escopo cross-repo para disparar repository_dispatch. Configure ORGANIZATION_SYNC_TOKEN nas secrets da Org para ativação imediata (o cron semanal continuará sincronizando normalmente)."
           fi
           echo "Notificando repositórios derivados da BRAN Org sobre o merge na main..."
-          REPOS=("BRAN-Org/ebbc-open-database" "BRAN-Org/abec-open-database" "BRAN-Org/datagramazero-open-database" "BRAN-Org/enancib-open-database")
+          REPOS=("BRAN-Org/ebbc-open-database" "BRAN-Org/abec-open-database" "BRAN-Org/datagramazero-open-database" "BRAN-Org/enancib-open-database" "BRAN-Org/cbbd-open-database")
           
           for REPO in "${REPOS[@]}"; do
             echo "Enviando sinal de atualizacao para: $REPO"
