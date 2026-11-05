@@ -153,12 +153,16 @@ export function queryItems(params = {}) {
   });
 
   // 4. Paginação
-  const limit = params.limit ? parseInt(params.limit, 10) : 20;
-  const offset = params.offset ? parseInt(params.offset, 10) : 0;
+  const limit = (params.limit !== undefined && params.limit !== null && params.limit !== '')
+    ? parseInt(params.limit, 10)
+    : 20;
+  const offset = (params.offset !== undefined && params.offset !== null && params.offset !== '')
+    ? parseInt(params.offset, 10)
+    : 0;
 
   const paginatedResults = (limit > 0)
     ? items.slice(offset, offset + limit)
-    : items;
+    : (offset > 0 ? items.slice(offset) : items);
 
   return {
     total: getAllItems().length,
