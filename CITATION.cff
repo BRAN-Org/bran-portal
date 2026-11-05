@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this template or software, please cite it as below."
+title: "BRAN Web Database Template"
+version: 1.6.0
+date-released: 2026-11-05
+url: "https://github.com/BRAN-Org/bran-web-database-template"
+repository-code: "https://github.com/BRAN-Org/bran-web-database-template"
+license: GPL-3.0-or-later
+authors:
+  - name: "BRAN Org"
+    website: "https://github.com/BRAN-Org"
+keywords:
+  - open-data
+  - bibliometrics
+  - academic-data
+  - rest-api
+  - database-template
+  - research-infrastructure

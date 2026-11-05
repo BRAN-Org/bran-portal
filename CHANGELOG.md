@@ -4,6 +4,24 @@ Este documento detalha a arquitetura, arquivos criados e funcionalidades impleme
 
 ---
 
+## [1.6.0] - 2026-11-05 (Exportação Bibliográfica Avançada, Correção de Paginação e Priorização de Identificadores)
+
+### Feat
+- **Exportação Bibliográfica Completa (RIS e BibTeX)**: Inclusão da tag `L1` (link direto para PDF) e `UR` no exportador RIS, e tags `eprint` e `url` no gerador BibTeX em `src/exportEngine.js`.
+
+### Fix
+- **Priorização de Correspondência Exata em `getItemByKey`**: Refatoração da busca individual em `src/dataManager.js` para priorizar correspondência estrita em ID, DOI e Título antes de recorrer ao fallback difuso, eliminando colisões por substring em prefixos de identificadores.
+- **Exportação Despaginada com `limit: 0`**: Correção na checagem de parâmetros de paginação em `src/dataManager.js`, permitindo que `/api/v1/articles/export?format=json` e `limit=0` exportem 100% dos registros sem truncamento.
+- **Validação de DOI com Notação por Ponto**: Sincronização do schema canônico `schemas/article.v1.schema.json` para permitir separadores por ponto (`10.22477.xxx`) comuns em periódicos OJS brasileiros.
+
+### Docs
+- **Governança e Citação**: Adição de `CITATION.cff`, `.editorconfig` e `.gitattributes` para padronização de quebra de linhas e metadados de citação acadêmica.
+
+### Chore / Test
+- **Testes de Integração de Exportação**: Adição de asserções em `tests/api.test.js` garantindo exportação integral sem limites indevidos.
+
+---
+
 ## [1.5.0] - 2026-09-18 (Formatos de Intercâmbio Bibliográfico: BibTeX e RIS)
 
 ### Novas Funcionalidades (Feat)
