@@ -8,6 +8,8 @@ Este documento detalha a arquitetura, arquivos criados e funcionalidades impleme
 
 ### Feat
 - **Exportação Bibliográfica Completa (RIS e BibTeX)**: Inclusão da tag `L1` (link direto para PDF) e `UR` no exportador RIS, e tags `eprint` e `url` no gerador BibTeX em `src/exportEngine.js`.
+- **Contrato OpenAPI 3.0 Machine-Readable**: Endpoint `/api/v1/openapi.json` gerando especificação OpenAPI 3.0.3 dinâmica a partir das configurações do dataset.
+- **Playground Interativo Aprimorado**: Suporte a todos os endpoints analíticos, tratamento nativo de formatos de texto (CSV, BibTeX, RIS) e geração dinâmica de snippets em cURL, Python, R, JavaScript e Node.js.
 
 ### Fix
 - **Priorização de Correspondência Exata em `getItemByKey`**: Refatoração da busca individual em `src/dataManager.js` para priorizar correspondência estrita em ID, DOI e Título antes de recorrer ao fallback difuso, eliminando colisões por substring em prefixos de identificadores.
@@ -15,10 +17,12 @@ Este documento detalha a arquitetura, arquivos criados e funcionalidades impleme
 - **Validação de DOI com Notação por Ponto**: Sincronização do schema canônico `schemas/article.v1.schema.json` para permitir separadores por ponto (`10.22477.xxx`) comuns em periódicos OJS brasileiros.
 
 ### Docs
+- **Guia Técnico da API (`docs/API.md`)**: Criação de manual de referência técnica completo para desenvolvedores e cienciometristas.
+- **Interface Web de Documentação Aprimorada**: Documentação interativa em `public/index.html` com tabelas detalhadas de parâmetros, schemas e códigos de status.
 - **Governança e Citação**: Adição de `CITATION.cff`, `.editorconfig` e `.gitattributes` para padronização de quebra de linhas e metadados de citação acadêmica.
 
 ### Chore / Test
-- **Testes de Integração de Exportação**: Adição de asserções em `tests/api.test.js` garantindo exportação integral sem limites indevidos.
+- **Testes de Integração de Exportação e OpenAPI**: Validação de 25 testes cobrindo rotas da API, exportação integral sem limites e contrato OpenAPI 3.0.
 
 ---
 
