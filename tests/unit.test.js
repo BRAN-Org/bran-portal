@@ -160,4 +160,25 @@ describe('Unit Tests - DataManager & StatsEngine', () => {
     assert.ok(abnt.includes('Disponível em: <https://portal.febab.org.br/cbbd2024/article/view/101>'));
     assert.strictEqual(abnt.toLowerCase().includes('zenodo'), false, 'ABNT do artigo não deve conter referências ao Zenodo');
   });
+
+  test('getDatabasesRegistry deve retornar metadados das 5 bases com contagens reais', async () => {
+    const { getDatabasesRegistry } = await import('../src/dataManager.js');
+    const registry = getDatabasesRegistry();
+    assert.ok(Array.isArray(registry));
+    assert.strictEqual(registry.length, 5);
+    const ebbc = registry.find(d => d.id === 'ebbc');
+    assert.ok(ebbc);
+    assert.ok(ebbc.totalRecords > 0);
+    assert.ok(ebbc.downloads.csv);
+    assert.ok(ebbc.downloads.sqlite);
+  });
+
+  test('queryItems com filtro database deve retornar apenas registros daquela base', () => {
+    const res = queryItems({ database: 'ebbc', limit: 10 });
+    assert.ok(res.results.length > 0);
+    res.results.forEach(it => {
+      assert.strictEqual(it.database, 'ebbc');
+    });
+  });
 });
+

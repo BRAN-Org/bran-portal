@@ -6,6 +6,8 @@ const currentLimit = 10;
 let currentPalette = 'tokyonight';
 let currentChartType = 'auto';
 let currentSortDir = 'asc';
+let currentDatabase = 'all';
+let databasesRegistry = [];
 
 const chartInstances = {};
 
@@ -74,20 +76,24 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     initModal();
     initDatasetCitationCard();
 
-  try {
-    const resConfig = await fetch('/api/v1/config');
-    appConfig = await resConfig.json();
+    try {
+      const resConfig = await fetch('/api/v1/config');
+      appConfig = await resConfig.json();
+      databasesRegistry = appConfig.databases || [];
 
-    applyConfigToUI(appConfig);
-    initToolbarControls();
+      applyConfigToUI(appConfig);
+      initToolbarControls();
+      initDatabaseChips();
+      renderDatabasesCatalog(databasesRegistry);
+      initDashboardDbSelector();
 
-    await loadStatsDashboard();
-    await loadExplorerData();
-    initSandbox();
-  } catch (err) {
-    console.error('⚠️ Falha na inicialização do portal:', err);
-  }
-});
+      await loadStatsDashboard('all');
+      await loadExplorerData();
+      initSandbox();
+    } catch (err) {
+      console.error('⚠️ Falha na inicialização do portal:', err);
+    }
+  });
 }
 
 function applyConfigToUI(config) {
@@ -227,12 +233,15 @@ function initToolbarControls() {
   }
 }
 
-async function loadStatsDashboard() {
+async function loadStatsDashboard(databaseId = 'all') {
   if (!appConfig) return;
   const entity = appConfig.dataset?.entityName || 'articles';
 
   try {
-    const res = await fetch(`/api/v1/${entity}/stats`);
+    const statsUrl = databaseId && databaseId !== 'all'
+      ? `/api/v1/${entity}/stats?database=${encodeURIComponent(databaseId)}`
+      : `/api/v1/${entity}/stats`;
+    const res = await fetch(statsUrl);
     const stats = await res.json();
 
     // Populate Metrics Summary Cards
@@ -565,6 +574,10 @@ async function loadExplorerData() {
   params.set('offset', currentOffset);
   params.set('order', currentSortDir);
 
+  if (currentDatabase && currentDatabase !== 'all') {
+    params.set('database', currentDatabase);
+  }
+
   const searchInput = document.getElementById('search-input');
   if (searchInput && searchInput.value) {
     params.set('search', searchInput.value);
@@ -608,8 +621,148 @@ async function loadExplorerData() {
     renderArticleCards(data.results);
     renderPaginationInfo(data);
     updateExportLinks(params);
+
+    if (data.databaseCounts) {
+      updateDatabaseChipsCounts(data.databaseCounts, data.filteredCount, data.total);
+    }
   } catch (err) {
     console.error('⚠️ Erro ao carregar explorador:', err);
+  }
+}
+
+function initDatabaseChips() {
+  const container = document.getElementById('database-chips-container');
+  if (!container) return;
+
+  const chips = [
+    { id: 'all', name: 'Todas as Bases', badgeColor: '#3b82f6', count: appConfig?.dataset?.totalRecords || '' },
+    ...databasesRegistry
+  ];
+
+  container.innerHTML = '';
+  chips.forEach(db => {
+    const btn = document.createElement('button');
+    btn.className = `db-chip ${currentDatabase === db.id ? 'active' : ''}`;
+    btn.setAttribute('data-db', db.id);
+
+    const dotStyle = db.badgeColor ? `background: ${db.badgeColor};` : '';
+    btn.innerHTML = `
+      <span class="db-chip-dot" style="${dotStyle}"></span>
+      <span class="db-chip-label">${escapeHtml(db.name)}</span>
+      <span class="db-chip-count" id="chip-count-${db.id}">${db.totalRecords ? db.totalRecords.toLocaleString('pt-BR') : ''}</span>
+    `;
+
+    btn.addEventListener('click', () => {
+      currentDatabase = db.id;
+      document.querySelectorAll('.db-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      currentOffset = 0;
+      loadExplorerData();
+    });
+
+    container.appendChild(btn);
+  });
+}
+
+function updateDatabaseChipsCounts(counts, filteredCount, totalCount) {
+  const allCountEl = document.getElementById('chip-count-all');
+  if (allCountEl) {
+    allCountEl.textContent = (currentDatabase === 'all' ? filteredCount : totalCount).toLocaleString('pt-BR');
+  }
+
+  Object.entries(counts).forEach(([dbId, count]) => {
+    const el = document.getElementById(`chip-count-${dbId}`);
+    if (el) {
+      el.textContent = count.toLocaleString('pt-BR');
+    }
+  });
+}
+
+function renderDatabasesCatalog(databases) {
+  const container = document.getElementById('databases-grid-container');
+  if (!container || !Array.isArray(databases)) return;
+
+  container.innerHTML = '';
+  databases.forEach(db => {
+    const card = document.createElement('div');
+    card.className = 'database-card glass-panel';
+    card.style.setProperty('--card-accent', db.badgeColor || '#3b82f6');
+
+    const totalStr = (db.totalRecords || 0).toLocaleString('pt-BR');
+    const periodStr = db.years || db.period || 'N/A';
+
+    card.innerHTML = `
+      <div>
+        <div class="database-card-header">
+          <div>
+            <h3 class="database-card-name">${escapeHtml(db.name)}</h3>
+            <p class="database-card-org">${escapeHtml(db.organization || '')}</p>
+          </div>
+          <span class="badge-pill" style="color: ${db.badgeColor || '#3b82f6'}; border-color: ${db.badgeColor || '#3b82f6'}40;">
+            <span class="status-dot" style="background: ${db.badgeColor || '#3b82f6'};"></span> Auditado
+          </span>
+        </div>
+        <p class="database-card-desc">${escapeHtml(db.description || '')}</p>
+        <div class="database-card-metrics">
+          <div class="database-metric-item">
+            <span class="database-metric-val">${totalStr}</span>
+            <span class="database-metric-label">Artigos</span>
+          </div>
+          <div class="database-metric-item">
+            <span class="database-metric-val">${escapeHtml(periodStr)}</span>
+            <span class="database-metric-label">Período</span>
+          </div>
+          <div class="database-metric-item">
+            <span class="database-metric-val">100%</span>
+            <span class="database-metric-label">FAIR / Aberto</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="margin-bottom: 0.85rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+          ${db.zenodoDoi ? `
+            <a href="${escapeHtml(db.zenodoUrl)}" target="_blank" class="btn-dl primary" title="Acessar depósito permanente no Zenodo">
+              <i class="fa-solid fa-box-archive"></i> Zenodo: ${escapeHtml(db.zenodoDoi)}
+            </a>
+          ` : `
+            <span class="btn-dl" style="opacity: 0.6; cursor: default;"><i class="fa-solid fa-clock"></i> DOI em preparação</span>
+          `}
+          <a href="${escapeHtml(db.githubUrl)}" target="_blank" class="btn-dl" title="Repositório GitHub">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </div>
+        <div class="database-card-actions">
+          <a href="${db.downloads?.json || `/data/${db.dataFile}`}" download class="btn-dl"><i class="fa-solid fa-file-code"></i> JSON</a>
+          <a href="${db.downloads?.csv || `/data/${db.csvFile}`}" download class="btn-dl"><i class="fa-solid fa-file-csv"></i> CSV</a>
+          <a href="${db.downloads?.sqlite || `/data/${db.sqliteFile}`}" download class="btn-dl"><i class="fa-solid fa-database"></i> SQLite</a>
+          <button class="btn-dl btn-filter-db" data-db="${db.id}" style="margin-left: auto; background: rgba(59, 130, 246, 0.12); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3);">
+            <i class="fa-solid fa-magnifying-glass"></i> Explorar
+          </button>
+        </div>
+      </div>
+    `;
+
+    card.querySelector('.btn-filter-db').addEventListener('click', () => {
+      currentDatabase = db.id;
+      document.querySelectorAll('.db-chip').forEach(c => {
+        if (c.getAttribute('data-db') === db.id) c.classList.add('active');
+        else c.classList.remove('active');
+      });
+      currentOffset = 0;
+      switchTab('explorer-tab');
+      loadExplorerData();
+    });
+
+    container.appendChild(card);
+  });
+}
+
+function initDashboardDbSelector() {
+  const select = document.getElementById('dashboard-db-select');
+  if (select) {
+    select.addEventListener('change', (e) => {
+      loadStatsDashboard(e.target.value);
+    });
   }
 }
 
@@ -634,7 +787,9 @@ function renderArticleCards(items) {
 
     const year = item.year || item.ano || 'N/A';
     const title = item.title || item.titulo || 'Sem título';
-    const authors = Array.isArray(item.authors) ? item.authors.join(', ') : (item.authors || 'N/A');
+    const authors = Array.isArray(item.authors)
+      ? item.authors.map(a => typeof a === 'object' && a !== null ? (a.name || '') : a).filter(Boolean).join(', ')
+      : (item.authors || 'Sem autoria declarada');
 
     let badgesHtml = '';
     
@@ -690,9 +845,16 @@ function renderArticleCards(items) {
       linksHeaderHtml += `<a href="${escapeHtml(pdfUrl)}" target="_blank" onclick="event.stopPropagation();" class="card-action-link pdf" title="Baixar PDF"><i class="fa-solid fa-file-pdf"></i> Baixar PDF</a>`;
     }
 
+    const dbColor = item.database_color || '#3b82f6';
+    const dbName = item.database_name || item.database?.toUpperCase() || 'BRAN';
+    const dbBadgeHtml = `<span class="badge-database" style="background: ${dbColor}1a; color: ${dbColor}; border: 1px solid ${dbColor}40;"><i class="fa-solid fa-database"></i> ${escapeHtml(dbName)}</span>`;
+
     card.innerHTML = `
       <div class="article-card-header">
-        <span class="badge-year">${year}</span>
+        <div style="display: flex; gap: 0.4rem; align-items: center;">
+          <span class="badge-year">${year}</span>
+          ${dbBadgeHtml}
+        </div>
         <div class="card-action-links">${linksHeaderHtml}</div>
       </div>
       <h3 class="article-title">${escapeHtml(title)}</h3>

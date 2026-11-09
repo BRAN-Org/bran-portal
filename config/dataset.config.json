@@ -4,24 +4,24 @@
     "url": "https://github.com/BRAN-Org",
     "logo": "https://avatars.githubusercontent.com/u/328064865?v=4",
     "institutionName": "BRAN Org",
-    "githubUrl": "https://github.com/BRAN-Org/bran-web-database-template",
+    "githubUrl": "https://github.com/BRAN-Org",
     "doiUrl": "",
     "issuesUrl": "https://github.com/BRAN-Org/bran-web-database-template/issues"
   },
   "dataset": {
-    "title": "BRAN Academic Database Template",
-    "subtitle": "Acervo e Base de Dados Abertos",
-    "description": "Infraestrutura aberta de dados acadêmicos e científicos. Este portal disponibiliza acervos públicos de anais, edições e periódicos em formatos limpos e padronizados, com API REST pública e ferramentas para análise cientométrica e bibliométrica no Brasil.",
-    "version": "1.0.0",
+    "title": "BRAN Open Data Portal",
+    "subtitle": "Portal Unificado de Dados Abertos e API da Ciência da Informação",
+    "description": "Infraestrutura de dados acadêmicos e cientométricos abertos no Brasil. Acesso unificado aos anais e publicações do ENANCIB, CBBD, EBBC, DataGramaZero e ABEC Meeting em formatos abertos (JSON, CSV, SQLite) e API REST pública.",
+    "version": "2.0.0",
     "doi": "",
     "zenodoDoi": "",
-    "zenodoUrl": "",
+    "zenodoUrl": "https://zenodo.org/communities/bran-org",
     "license": "Code: GNU GPLv3 | Data: CC BY-NC-SA 4.0 (Não-Comercial & Sem Treino Comercial de IA)",
     "entityName": "articles",
     "singularName": "Artigo",
     "pluralName": "Artigos",
-    "primaryKey": "doi",
-    "secondaryKey": "id"
+    "primaryKey": "id",
+    "secondaryKey": "doi"
   },
   "schema": {
     "searchFields": ["title", "abstract", "authors", "keywords", "section", "issue"],

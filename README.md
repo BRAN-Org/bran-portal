@@ -1,121 +1,116 @@
-# BRAN Web Database Template
+# BRAN Open Data Portal & API Gateway
 
 <p align="center">
   <a href="https://github.com/BRAN-Org"><img src="https://img.shields.io/badge/BRAN%20Org-Open%20Data-blue.svg?logo=github" alt="BRAN Org"></a>
-  <a href="provenance.json"><img src="https://img.shields.io/badge/Identifica%C3%A7%C3%A3o-100%25-brightgreen.svg" alt="Identificação"></a>
-  <a href="schemas/article.v1.schema.json"><img src="https://img.shields.io/badge/Schema-article.v1-blue.svg" alt="Schema"></a>
+  <img src="https://img.shields.io/badge/Acervo-11.937%20Artigos-brightgreen.svg" alt="Total de Artigos">
+  <img src="https://img.shields.io/badge/Bases-5%20Integradas-blue.svg" alt="Bases de Dados">
   <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg" alt="BOAI Signatory"></a>
   <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg" alt="FAIR Principles"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Code-GPLv3-blue.svg" alt="GPLv3"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Data-CC_BY--NC--SA_4.0-lightgrey.svg" alt="CC BY-NC-SA 4.0"></a>
 </p>
 
-Template padrão da **[BRAN Org](https://github.com/BRAN-Org)** para publicação de bases de dados acadêmicas e científicas abertas. Fornece uma **API REST pública de alta performance** e um **Dashboard Web interativo com gráficos SVG nativos**, sem necessidade de bundlers ou transpiladores pesados.
+Portal unificado e API REST pública da **[BRAN Org](https://github.com/BRAN-Org)** para acesso federado aos acervos científicos abertos da Ciência da Informação no Brasil.
+
+O portal integra ~12.000 artigos acadêmicos diretamente em memória, provendo consultas em sub-milissegundos, exportação bibliográfica e visualizações cientométricas vetoriais sem dependência de banco de dados externo ou transpiladores pesados.
 
 ---
 
-## ⚡ Recursos e Arquitetura
+## 📚 Bases de Dados Integradas
 
-- **Zero-Build & Alta Performance**: Desenvolvido em Node.js com ES Modules (`"type": "module"`), dependendo apenas de `express` e `cors`.
-- **Agnóstico a Dados**: Entidade, esquemas, facetas de busca, ordenação e filtros configurados centralmente via `config/dataset.config.json`.
-- **Contratos Canônicos (JSON Schema)**: Validação estrita de schemas de artigos (`schemas/article.v1.schema.json`) e proveniência criptográfica (`schemas/provenance.v1.schema.json`).
-- **REST API Pública**:
-  - `GET /api/v1/:entity`: Busca textual global (`?q=`), filtros facetados, ordenação e paginação.
-  - `GET /api/v1/:entity/stats`: Estatísticas consolidadas e distribuições temporais em tempo real.
-  - `GET /api/v1/:entity/:key`: Consulta exata por ID ou DOI.
-  - `GET /api/v1/:entity/export`: Streaming nos formatos CSV (BOM UTF-8 para Excel), JSON, BibTeX e RIS.
-- **Painel Web com Gráficos SVG Nativos**: Visualizações vetoriais responsivas via [`pure-svg-charts`](https://github.com/GabrielBaiano/pure-svg-charts) com exportação SVG/PNG e API Sandbox com gerador de código (cURL, Python, JS).
-- **Auditoria Automatizada (CRONA Bot)**: Scripts integrados para conferência estrita de integridade de dados e resolução de identificadores persistentes.
+| Base | Evento / Periódico | Cobertura | Registros | Depósito Zenodo |
+| :--- | :--- | :---: | :---: | :--- |
+| **ENANCIB** | Encontro Nacional de Pesquisa em Ciência da Informação | 2003–2024 | 6.998 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17441126.svg)](https://doi.org/10.5281/zenodo.17441126) |
+| **CBBD** | Congresso Brasileiro de Biblioteconomia e Documentação | 2013–2019 | 3.385 | Em preparação |
+| **EBBC** | Encontro Brasileiro de Bibliometria e Cientometria | 2012–2024 | 808 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17441113.svg)](https://doi.org/10.5281/zenodo.17441113) |
+| **DataGramaZero** | Revista de Ciência da Informação (DGZ) | 1999–2015 | 487 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17441098.svg)](https://doi.org/10.5281/zenodo.17441098) |
+| **ABEC Meeting** | Encontros da Associação Brasileira de Editores Científicos | 2018–2023 | 259 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17441132.svg)](https://doi.org/10.5281/zenodo.17441132) |
+| **Total** | **Acervo Unificado da Ciência da Informação** | **1994–2026** | **11.937** | **Acesso Livre & Gratuito** |
 
 ---
 
-## 🚀 Como Criar uma Nova Base de Dados a Partir Deste Template
+## ⚡ Recursos da Arquitetura
+
+- **Busca Federada em Tempo Real**: Consulta instantânea nos 11.937 registros combinando título, resumo, autores e palavras-chave.
+- **Filtros por Base ou Globais**: Chips rápidos na interface para alternar entre todas as bases ou isolar eventos específicos.
+- **Catálogo de Datasets e Downloads**: Links diretos para download dos 3 formatos canônicos (`.json`, `.csv` RFC 4180 com UTF-8 BOM, `.sqlite` com FTS5) e pacotes Zenodo.
+- **API REST Pública Sem Autenticação**:
+  - `GET /api/v1/databases`: Catálogo das 5 bases com contadores, períodos e links.
+  - `GET /api/v1/databases/:database`: Metadados e estatísticas de uma base específica.
+  - `GET /api/v1/articles`: Busca federada global (`?q=`, `?database=`, `?year=`, `?author=`, `?limit=`, `?offset=`).
+  - `GET /api/v1/:database/articles`: Rotas scoped por evento (ex: `/api/v1/ebbc/articles`).
+  - `GET /api/v1/articles/:key`: Busca exata por DOI ou ID canônico.
+  - `GET /api/v1/articles/export`: Exportação sob demanda em CSV, BibTeX, RIS e JSON.
+  - `GET /api/v1/articles/stats`: Métricas cientométricas agregadas ou filtradas por base.
+  - `GET /api/v1/openapi.json`: Especificação completa OpenAPI 3.0.
+- **Interface Web Simples e Responsiva**: Dashboard com gráficos SVG nativos via [`pure-svg-charts`](https://github.com/GabrielBaiano/pure-svg-charts), sem dependência de bibliotecas pesadas de CDN.
+
+---
+
+## 🛠️ Execução Local
 
 ### 1. Clonar e Instalar
 ```bash
-git clone https://github.com/BRAN-Org/bran-web-database-template.git meu-evento-open-database
-cd meu-evento-open-database
+git clone https://github.com/BRAN-Org/bran-web-database-template.git bran-portal
+cd bran-portal
 npm install
 ```
 
-### 2. Configurar o Dataset (`config/dataset.config.json`)
-Defina os metadados do evento, entidade e facetas de busca:
-```json
-{
-  "dataset": {
-    "title": "Nome do Evento / Periódico Open Database",
-    "description": "Descrição sucinta do acervo histórico e dos metadados.",
-    "version": "1.0.0",
-    "entityName": "articles",
-    "primaryKey": "id",
-    "secondaryKey": "doi"
-  },
-  "schema": {
-    "searchFields": ["title", "abstract", "authors", "keywords"],
-    "facets": [
-      { "key": "year", "label": "Ano", "type": "number", "targetField": "year" },
-      { "key": "author", "label": "Autor", "type": "string", "targetField": "authors" }
-    ]
-  }
-}
+### 2. Sincronizar Datasets
+```bash
+# Copia datasets dos repositórios locais irmãos ou baixa diretamente via GitHub Raw:
+npm run data:sync
 ```
 
-### 3. Inserir Dados e Proveniência
-- Insira o arquivo JSON estruturado em `data/<nome>_articles.json`.
-- Registre o hash SHA-256 e metadados de extração em `provenance.json`.
-
-### 4. Gerar README Inicial do Evento
+### 3. Rodar Testes Automatizados
 ```bash
-# Gera o README.md conciso pré-formatado a partir de EVENT_README_TEMPLATE.md
-npm run init:event
-```
-
-### 5. Validar Integridade e Testar
-```bash
-# Validar conformidade de schemas e hashes SHA-256
-npm run data:validate
-
-# Rodar auditoria profunda com CRONA Bot engine
-npm run data:audit
-
-# Executar suite de testes nativa (Node 20+ LTS)
 npm test
+```
 
-# Iniciar servidor localmente
+### 4. Iniciar Servidor
+```bash
 npm start
-```
-Acesse no navegador: `http://localhost:3000`
-
----
-
-## 📁 Estrutura do Repositório
-
-```
-bran-web-database-template/
-├── config/                  # dataset.config.json (configurações do evento e campos)
-├── data/                    # Dataset de produção (ex: evento_articles.json)
-├── schemas/                 # Schemas canônicos JSON Schema (article e provenance)
-├── public/                  # Portal estático (HTML, CSS e bundle pure-svg-charts)
-├── scripts/                 # Validadores, conversor CSV, auditoria CRONA e bundles
-├── src/                     # Núcleo da API (dataManager, statsEngine, routes, exportEngine)
-├── tests/                   # Testes unitários e testes de integração REST
-├── .templatesyncignore      # Arquivos protegidos contra sobrescrita na sincronização
-├── EVENT_README_TEMPLATE.md # Template conciso para os repositórios filhos de eventos
-└── server.js                # Servidor Express principal
+# Acesse o portal em http://localhost:3000
 ```
 
 ---
 
-## 🔄 Sincronização Automática com Repositórios Filhos (Template Sync)
+## 📡 Exemplos de Uso da API
 
-O repositório utiliza o GitHub Action `actions-template-sync` para propagar atualizações de infraestrutura (`src/`, `public/`, `schemas/`, `tests/`) para todos os repositórios de bases derivados da organização:
+### Python (Pandas)
+```python
+import pandas as pd
 
-- **Arquivos Protegidos:** Diretórios de dados (`data/`), mock de testes (`mock/`), configurações locais (`config/dataset.config.json`), `README.md`, `provenance.json` e `package.json` são preservados via `.templatesyncignore`.
-- **Integridade Garantida:** Cada PR de sincronização passa pelo `Template Sync Guard` e `CRONA Guard` para assegurar que nenhum dado de produção seja afetado.
+# Carregar artigos do EBBC direto da API
+url = "http://localhost:3000/api/v1/ebbc/export?format=csv"
+df = pd.read_csv(url)
+print(f"Total carregado: {len(df)} artigos")
+print(df[['title', 'year', 'doi']].head())
+```
+
+### R
+```r
+library(jsonlite)
+
+# Busca federada por 'cienciometria' em todo o acervo
+url <- "http://localhost:3000/api/v1/articles?q=cienciometria&limit=50"
+data <- fromJSON(url)
+print(data$filteredCount)
+head(data$results$title)
+```
+
+### cURL
+```bash
+# Consultar catálogo oficial de bases
+curl -s http://localhost:3000/api/v1/databases | jq .
+
+# Buscar trabalhos por autor no ENANCIB
+curl -s "http://localhost:3000/api/v1/enancib/articles?author=Marcondes" | jq .
+```
 
 ---
 
-## ⚖️ Licenciamento
+## 📄 Licenças
 
-- **Código e Engine:** [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html) — Garante software livre e auditável.
-- **Dados e Metadados Científicos:** [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/) — Livre para pesquisa acadêmica; vedado uso ou raspagem para modelos comerciais de IA sem autorização.
+- **Código-Fonte**: [GNU General Public License v3.0](LICENSE) (GPL-3.0-or-later)
+- **Dados Acadêmicos e Científicos**: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) (CC BY-NC-SA 4.0). Não comercial e sem treino comercial de IA.

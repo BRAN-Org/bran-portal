@@ -132,4 +132,37 @@ describe('Integration Tests - REST API Endpoints', () => {
     assert.ok(spec.info && spec.info.title);
     assert.ok(spec.paths['/articles']);
   });
+
+  test('GET /api/v1/databases deve retornar catálogo com as 5 bases de dados', async () => {
+    const res = await fetchApi('/api/v1/databases');
+    assert.strictEqual(res.status, 200);
+    const databases = await res.json();
+    assert.ok(Array.isArray(databases));
+    assert.strictEqual(databases.length, 5);
+    const ids = databases.map(d => d.id);
+    assert.ok(ids.includes('ebbc'));
+    assert.ok(ids.includes('enancib'));
+    assert.ok(ids.includes('cbbd'));
+  });
+
+  test('GET /api/v1/databases/ebbc deve retornar metadados e estatísticas da base EBBC', async () => {
+    const res = await fetchApi('/api/v1/databases/ebbc');
+    assert.strictEqual(res.status, 200);
+    const data = await res.json();
+    assert.strictEqual(data.id, 'ebbc');
+    assert.strictEqual(data.name, 'EBBC');
+    assert.ok(data.stats);
+    assert.ok(data.downloads);
+  });
+
+  test('GET /api/v1/ebbc/articles deve retornar apenas artigos do EBBC', async () => {
+    const res = await fetchApi('/api/v1/ebbc/articles?limit=5');
+    assert.strictEqual(res.status, 200);
+    const data = await res.json();
+    assert.ok(data.results.length > 0);
+    data.results.forEach(art => {
+      assert.strictEqual(art.database, 'ebbc');
+    });
+  });
 });
+

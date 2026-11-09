@@ -8,6 +8,10 @@ npm-debug.log*
 # Raw archives and scraped binaries
 data/pdfs/
 data/raw/
+data/*_articles.json
+data/*_articles.csv
+data/*_articles.sqlite
+data/*_provenance.json
 *.zip
 *.sqlite
 *.sqlite3

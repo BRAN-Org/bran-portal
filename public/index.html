@@ -60,11 +60,14 @@
       <button class="tab-btn active" data-tab="home-tab">
         <i class="fa-solid fa-house"></i> <span>Início</span>
       </button>
-      <button class="tab-btn" data-tab="dashboard-tab">
-        <i class="fa-solid fa-chart-line"></i> <span>Dashboard (Métricas)</span>
+      <button class="tab-btn" data-tab="databases-tab" id="databases-tab-btn">
+        <i class="fa-solid fa-database"></i> <span>Catálogo de Bases</span>
       </button>
       <button class="tab-btn" data-tab="explorer-tab" id="explorer-tab-btn">
         <i class="fa-solid fa-magnifying-glass"></i> <span>Explorador de Dados</span>
+      </button>
+      <button class="tab-btn" data-tab="dashboard-tab">
+        <i class="fa-solid fa-chart-line"></i> <span>Dashboard (Métricas)</span>
       </button>
       <button class="tab-btn" data-tab="docs-tab">
         <i class="fa-solid fa-code"></i> <span>Documentação da API</span>
@@ -218,8 +221,41 @@
 
       </section>
 
-      <!-- 1. DASHBOARD COMPLETO (4 GRÁFICOS UNIVERSIAS E ESSENCIAIS) -->
+      <!-- 1. CATÁLOGO DE BASES DE DADOS ABERTAS -->
+      <section id="databases-tab" class="tab-panel">
+        <div class="glass-panel" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h2 style="font-size: 1.4rem; font-weight: 700; color: #fff;"><i class="fa-solid fa-database"></i> Catálogo Oficial de Bases de Dados</h2>
+              <p style="color: var(--text-secondary); margin-top: 0.35rem; font-size: 0.9rem;">
+                Acervos científicos abertos da Ciência da Informação no Brasil. Cada repositório opera como um <strong>FAIR Data Package</strong> com formatos abertos canônicos (.json, .csv com UTF-8 BOM e .sqlite com busca textual FTS5).
+              </p>
+            </div>
+            <span class="badge-pill" style="color: #30d158; border-color: rgba(48, 209, 88, 0.4);">
+              <span class="status-dot"></span> 5 Bases Integradas
+            </span>
+          </div>
+        </div>
+
+        <div class="databases-grid" id="databases-grid-container">
+          <!-- Cards populados dinamicamente via JS a partir de /api/v1/databases -->
+        </div>
+      </section>
+
+      <!-- 2. DASHBOARD COMPLETO (MÉTRICAS & CIENTOMETRIA) -->
       <section id="dashboard-tab" class="tab-panel">
+        <!-- Seletor de Escopo de Base de Dados -->
+        <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <label style="font-size: 0.88rem; color: var(--text-secondary);"><i class="fa-solid fa-filter"></i> Escopo das Métricas:</label>
+          <select id="dashboard-db-select" class="filter-select" style="min-width: 240px; font-weight: 600;">
+            <option value="all">Todas as Bases (11.937 artigos)</option>
+            <option value="enancib">ENANCIB (6.998 artigos)</option>
+            <option value="cbbd">CBBD (3.385 artigos)</option>
+            <option value="ebbc">EBBC (808 artigos)</option>
+            <option value="datagramazero">DataGramaZero (487 artigos)</option>
+            <option value="abec">ABEC Meeting (259 artigos)</option>
+          </select>
+        </div>
         <!-- Key Stats Cards Consolidados -->
         <div class="stats-grid">
           <div class="stat-card">
@@ -446,6 +482,11 @@
 
           <!-- Main Results Table / Cards -->
           <div class="explorer-results">
+            <!-- Database Quick Filter Chips -->
+            <div class="db-chips-bar" id="database-chips-container">
+              <!-- Gerado dinamicamente via JS com contagens em tempo real -->
+            </div>
+
             <!-- Controls Bar -->
             <div class="results-toolbar glass-panel">
               <div class="toolbar-left">

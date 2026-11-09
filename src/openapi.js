@@ -36,19 +36,47 @@ export function generateOpenApiSpec(config) {
       }
     ],
     tags: [
+      { name: 'Databases', description: 'Catálogo oficial de bases de dados acadêmicas da BRAN Org' },
       { name: plural, description: `Operações e consultas de ${plural.toLowerCase()}` },
       { name: 'Analytics', description: 'Métricas, correlações e estatísticas consolidadas' },
       { name: 'Export', description: 'Exportação em lote nos formatos JSON, CSV, BibTeX e RIS' },
       { name: 'Config', description: 'Metadados da base, instituição e facetas de busca' }
     ],
     paths: {
+      '/databases': {
+        get: {
+          tags: ['Databases'],
+          summary: 'Listar catálogo de bases de dados abertas',
+          description: 'Retorna a lista das 5 bases de dados abertas da BRAN Org com totais de artigos, período de cobertura, DOI Zenodo e links diretos de download.',
+          responses: {
+            '200': {
+              description: 'Catálogo de bases de dados',
+              content: { 'application/json': { schema: { type: 'array' } } }
+            }
+          }
+        }
+      },
+      '/databases/{database}': {
+        get: {
+          tags: ['Databases'],
+          summary: 'Obter metadados e estatísticas de uma base de dados específica',
+          parameters: [
+            { name: 'database', in: 'path', required: true, description: 'Identificador da base (ebbc, enancib, cbbd, datagramazero, abec)', schema: { type: 'string' } }
+          ],
+          responses: {
+            '200': { description: 'Metadados da base' },
+            '404': { description: 'Base não encontrada' }
+          }
+        }
+      },
       [`/${entity}`]: {
         get: {
           tags: [plural],
           summary: `Listar ${plural.toLowerCase()} com filtros e paginação`,
-          description: `Retorna uma lista paginada de ${plural.toLowerCase()} aplicando busca textual global (?q=), filtros facetados (?year=, ?author=, etc.) e ordenação configurável.`,
+          description: `Retorna uma lista paginada de ${plural.toLowerCase()} aplicando busca textual global (?q=), filtros por base (?database=), facetas (?year=, ?author=) e ordenação configurável.`,
           operationId: `list${plural}`,
           parameters: [
+            { name: 'database', in: 'query', description: 'Filtrar por base de dados (ex: ebbc, enancib, cbbd, datagramazero, abec)', required: false, schema: { type: 'string' } },
             { name: 'q', in: 'query', description: 'Busca textual insensível a caixa e acentos em título, resumo, autores e palavras-chave', required: false, schema: { type: 'string' } },
             { name: 'year', in: 'query', description: 'Filtrar por ano/edição (permite múltiplos anos separados por vírgula, ex: 2022,2024)', required: false, schema: { type: 'string' } },
             { name: 'author', in: 'query', description: 'Filtrar por nome de autor', required: false, schema: { type: 'string' } },
