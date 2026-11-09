@@ -21,16 +21,19 @@ jobs:
         run: |
           node --check server.js
           node --check src/config.js
+          node --check src/databases.js
           node --check src/dataManager.js
           node --check src/exportEngine.js
           node --check src/statsEngine.js
           node --check src/routes.js
+          node --check src/openapi.js
+          node --check scripts/fetch_datasets.js
           node --check public/js/app.js
           node --check public/js/charts.js
           node --check public/js/pure-svg-charts.bundle.js
 
   dataset-validation:
-    name: Dataset Schema & EBBC Mock Validation
+    name: Dataset Schema & Federated Datasets Validation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.2.2
@@ -41,13 +44,10 @@ jobs:
       - run: npm ci
       - name: Validate Default Template Dataset
         run: npm run data:validate
-      - name: Validate EBBC OpenData Mock Dataset (643 Records)
+      - name: Fetch and Validate Federated Datasets
         run: |
-          if [ -d "mock/ebbc" ]; then
-            npm run data:ebbc
-          else
-            echo "Diretorio mock/ebbc nao existe neste repositorio. Ignorando."
-          fi
+          node scripts/fetch_datasets.js
+          npm run data:validate
 
   unit-and-api-tests:
     name: Unit & REST API Tests (Node ${{ matrix.node-version }})
@@ -64,5 +64,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
+      - name: Fetch Datasets for Testing
+        run: node scripts/fetch_datasets.js
       - name: Run Test Suite
         run: npm test
