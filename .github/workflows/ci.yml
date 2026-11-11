@@ -64,8 +64,11 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
-      - name: Build Static Portal and Sync Datasets
-        run: npm run build
+      - name: Fetch Datasets and Build Static Portal
+        run: |
+          node scripts/fetch_datasets.js
+          npm run build
       - name: Run Full Test Suite (36 Tests)
         run: npm test
+
 
