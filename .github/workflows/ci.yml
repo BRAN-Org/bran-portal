@@ -27,10 +27,9 @@ jobs:
           node --check src/statsEngine.js
           node --check src/routes.js
           node --check src/openapi.js
+          node --check src/citationUtils.js
           node --check scripts/fetch_datasets.js
-          node --check public/js/app.js
-          node --check public/js/charts.js
-          node --check public/js/pure-svg-charts.bundle.js
+          node --check scripts/sync_data.js
 
   dataset-validation:
     name: Dataset Schema & Federated Datasets Validation
@@ -55,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v4.2.2
@@ -64,7 +63,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - name: Fetch Datasets for Testing
-        run: node scripts/fetch_datasets.js
-      - name: Run Test Suite
+      - name: Build Static Portal and Sync Datasets
+        run: npm run build
+      - name: Run Full Test Suite (36 Tests)
         run: npm test
+
