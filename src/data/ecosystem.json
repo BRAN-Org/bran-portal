@@ -1,0 +1,664 @@
+{
+  "generated_at": "2026-11-11T18:34:53.899Z",
+  "metrics": {
+    "total_records": 11937,
+    "total_databases": 5,
+    "total_conferences": 4,
+    "total_journals": 1,
+    "coverage_span": "1954–2026",
+    "open_access_percentage": 100,
+    "zero_fabricated_dois": true
+  },
+  "current_calendar": {
+    "current_month": 11,
+    "current_month_name": "Novembro",
+    "current_year": 2026,
+    "active_events": [],
+    "upcoming_events": [
+      {
+        "id": "enancib-open-database",
+        "name": "ENANCIB - Encontro Nacional de Pesquisa e Pós-Graduação em Ciência da Informação",
+        "sigla": "ENANCIB",
+        "type": "Conferência / Anais",
+        "publisher": "ANCIB / Benancib / BRAPCI",
+        "cadence": "annual",
+        "coverage_years": "1994–2026",
+        "editions": "25 edições completas",
+        "repo_url": "https://github.com/BRAN-Org/enancib-open-database",
+        "app_url": "https://enancib.bran.inf.br",
+        "zenodo_doi": "10.5281/zenodo.10000001",
+        "zenodo_url": "https://zenodo.org/communities/bran-org",
+        "description": "Acervo histórico integral de todas as 25 edições do ENANCIB com 12 Grupos de Trabalho (GTs) mapeados, 96.7% de resumos e enriquecimento metodológico de autoria e afiliações.",
+        "default_stats": {
+          "total_records": 6998,
+          "health_level": "HIGH_FIDELITY",
+          "raw_data_sha256": "005d88603d3b250238b77a4d7a4ca730b63528220c7a4c3b2f4e1faa5ce56e1c",
+          "scraped_at": "2026-10-20T19:24:00Z"
+        },
+        "stats": {
+          "total_records": 6998,
+          "health_level": "GREEN",
+          "raw_data_sha256": "005d88603d3b250238b77a4d7a4ca730b63528220c7a4c3b2f4e1faa5ce56e1c",
+          "scraped_at": "2026-10-20T19:24:00Z",
+          "last_audited_at": "2026-11-09T13:28:13.530365+00:00",
+          "notes": "Acervo histórico integral dos anais de todas as 25 edições do ENANCIB (1994-2026), unificando os dados colhidos do portal OJS oficial da ANCIB (2021-2026) e o resgate da base histórica BENANCIB / UFPB (1994-2019, indexada na BRAPCI), com enriquecimento censitário de resumos e palavras-chave cruzados com a Base ABCDM (Faculdade de Ciência da Informação - FCI/UnB). Classificação Verde (Auditado e Validado com Preservação Digital Histórica): 100% dos 6998 trabalhos catalogados, 96.7% de cobertura de resumos, padronização canônica dos 12 Grupos de Trabalho (GTs) e enriquecimento metodológico/cientométrico conforme os padrões da BRAN Org."
+        },
+        "schedule": {
+          "id": "enancib-open-database",
+          "name": "ENANCIB - Encontro Nacional de Pesquisa e Pós-Graduação em Ciência da Informação",
+          "short_name": "ENANCIB",
+          "sigla": "ENANCIB",
+          "check_day": 1,
+          "repo": "BRAN-Org/enancib-open-database",
+          "url": "https://enancib.ancib.org/",
+          "cadence": "annual",
+          "check_months": [
+            12,
+            1
+          ],
+          "summary": "Verificação dos anais do ENANCIB e atualização do dataset",
+          "description": "Janela anual para conferir os anais da última edição do ENANCIB, incorporar trabalhos dos GTs, validar conformidade de schema e atualizar preservação digital.",
+          "labels": [
+            "curation",
+            "enancib-open-database"
+          ],
+          "checklist": [
+            "Acessar os anais no portal oficial da ANCIB / Benancib (https://enancib.ancib.org/) e checar publicação da edição mais recente",
+            "Extrair os trabalhos apresentados nos Grupos de Trabalho (GTs) e normalizar DOIs/metadados",
+            "Validar integridade do schema JSON (`npm run data:validate`)",
+            "Atualizar versão e registrar no CHANGELOG.md",
+            "Gerar novo bundle de preservação digital de texto completo para o Zenodo"
+          ]
+        }
+      },
+      {
+        "id": "abec-open-database",
+        "name": "ABEC Meeting - Associação Brasileira de Editores Científicos",
+        "sigla": "ABEC Meeting",
+        "type": "Conferência / Reunião Anual",
+        "publisher": "ABEC Brasil",
+        "cadence": "annual",
+        "coverage_years": "2013–2025",
+        "editions": "Edições anuais catalogadas",
+        "repo_url": "https://github.com/BRAN-Org/abec-open-database",
+        "app_url": "https://abec.bran.inf.br",
+        "zenodo_doi": "10.5281/zenodo.10000005",
+        "zenodo_url": "https://zenodo.org/communities/bran-org",
+        "description": "Acervo de anais e resumos dos encontros da ABEC Brasil sobre editoração científica, integridade em pesquisa e indexação internacional.",
+        "default_stats": {
+          "total_records": 259,
+          "health_level": "IN_CURATION",
+          "raw_data_sha256": "341d2f797f2971d482fd2c4ee16cca43a354dbcd2d8e621d0d5d44f722fece9c",
+          "scraped_at": "2026-09-13T14:30:00Z"
+        },
+        "stats": {
+          "total_records": 259,
+          "health_level": "ORANGE",
+          "raw_data_sha256": "341d2f797f2971d482fd2c4ee16cca43a354dbcd2d8e621d0d5d44f722fece9c",
+          "scraped_at": "2026-09-13T14:30:00Z",
+          "last_audited_at": "2026-11-09T13:25:04.160010+00:00",
+          "notes": "Acervo de anais e reuniões científicas da ABEC Brasil (2013-2025) resgatados e padronizados no formato BRAN Org v1. Classificação Laranja (Em Curadoria) com extração realizada com sucesso via OJS e metadados em processo de saneamento contínuo."
+        },
+        "schedule": {
+          "id": "abec-open-database",
+          "name": "ABEC Meeting (Associação Brasileira de Editores Científicos)",
+          "short_name": "ABEC",
+          "sigla": "ABEC",
+          "check_day": 1,
+          "repo": "BRAN-Org/abec-open-database",
+          "url": "https://www.abecbrasil.org.br/",
+          "cadence": "annual",
+          "check_months": [
+            12,
+            1
+          ],
+          "summary": "Verificação dos anais do ABEC Meeting e atualização do dataset",
+          "description": "Janela anual para verificar anais e resumos publicados no portal da ABEC Brasil, atualizar base e acervo de PDFs.",
+          "labels": [
+            "curation",
+            "abec-open-database"
+          ],
+          "checklist": [
+            "Acessar o portal da ABEC Brasil (https://www.abecbrasil.org.br/) e verificar publicação dos anais da edição anual",
+            "Executar rotina de extração de resumos e metadados dos artigos apresentados",
+            "Validar integridade do schema JSON (`npm run data:validate`)",
+            "Atualizar versão e registrar no CHANGELOG.md",
+            "Atualizar cold storage no Zenodo"
+          ]
+        }
+      }
+    ],
+    "ics_feed_url": "https://raw.githubusercontent.com/BRAN-Org/calendar_config/main/calendar.ics"
+  },
+  "databases": [
+    {
+      "id": "enancib-open-database",
+      "name": "ENANCIB - Encontro Nacional de Pesquisa e Pós-Graduação em Ciência da Informação",
+      "sigla": "ENANCIB",
+      "type": "Conferência / Anais",
+      "publisher": "ANCIB / Benancib / BRAPCI",
+      "cadence": "annual",
+      "coverage_years": "1994–2026",
+      "editions": "25 edições completas",
+      "repo_url": "https://github.com/BRAN-Org/enancib-open-database",
+      "app_url": "https://enancib.bran.inf.br",
+      "zenodo_doi": "10.5281/zenodo.10000001",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "description": "Acervo histórico integral de todas as 25 edições do ENANCIB com 12 Grupos de Trabalho (GTs) mapeados, 96.7% de resumos e enriquecimento metodológico de autoria e afiliações.",
+      "default_stats": {
+        "total_records": 6998,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "005d88603d3b250238b77a4d7a4ca730b63528220c7a4c3b2f4e1faa5ce56e1c",
+        "scraped_at": "2026-10-20T19:24:00Z"
+      },
+      "stats": {
+        "total_records": 6998,
+        "health_level": "GREEN",
+        "raw_data_sha256": "005d88603d3b250238b77a4d7a4ca730b63528220c7a4c3b2f4e1faa5ce56e1c",
+        "scraped_at": "2026-10-20T19:24:00Z",
+        "last_audited_at": "2026-11-09T13:28:13.530365+00:00",
+        "notes": "Acervo histórico integral dos anais de todas as 25 edições do ENANCIB (1994-2026), unificando os dados colhidos do portal OJS oficial da ANCIB (2021-2026) e o resgate da base histórica BENANCIB / UFPB (1994-2019, indexada na BRAPCI), com enriquecimento censitário de resumos e palavras-chave cruzados com a Base ABCDM (Faculdade de Ciência da Informação - FCI/UnB). Classificação Verde (Auditado e Validado com Preservação Digital Histórica): 100% dos 6998 trabalhos catalogados, 96.7% de cobertura de resumos, padronização canônica dos 12 Grupos de Trabalho (GTs) e enriquecimento metodológico/cientométrico conforme os padrões da BRAN Org."
+      },
+      "schedule": {
+        "id": "enancib-open-database",
+        "name": "ENANCIB - Encontro Nacional de Pesquisa e Pós-Graduação em Ciência da Informação",
+        "short_name": "ENANCIB",
+        "sigla": "ENANCIB",
+        "check_day": 1,
+        "repo": "BRAN-Org/enancib-open-database",
+        "url": "https://enancib.ancib.org/",
+        "cadence": "annual",
+        "check_months": [
+          12,
+          1
+        ],
+        "summary": "Verificação dos anais do ENANCIB e atualização do dataset",
+        "description": "Janela anual para conferir os anais da última edição do ENANCIB, incorporar trabalhos dos GTs, validar conformidade de schema e atualizar preservação digital.",
+        "labels": [
+          "curation",
+          "enancib-open-database"
+        ],
+        "checklist": [
+          "Acessar os anais no portal oficial da ANCIB / Benancib (https://enancib.ancib.org/) e checar publicação da edição mais recente",
+          "Extrair os trabalhos apresentados nos Grupos de Trabalho (GTs) e normalizar DOIs/metadados",
+          "Validar integridade do schema JSON (`npm run data:validate`)",
+          "Atualizar versão e registrar no CHANGELOG.md",
+          "Gerar novo bundle de preservação digital de texto completo para o Zenodo"
+        ]
+      }
+    },
+    {
+      "id": "cbbd-open-database",
+      "name": "CBBD - Congresso Brasileiro de Biblioteconomia, Documentação e Ciência da Informação",
+      "sigla": "CBBD",
+      "type": "Conferência / Anais",
+      "publisher": "FEBAB",
+      "cadence": "biennial-even",
+      "coverage_years": "1954–2026",
+      "editions": "Edições com anais digitais",
+      "repo_url": "https://github.com/BRAN-Org/cbbd-open-database",
+      "app_url": "https://cbbd.bran.inf.br",
+      "zenodo_doi": "10.5281/zenodo.10000002",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "description": "Acervo histórico dos anais digitais do CBBD promovido pela FEBAB, estruturado em eixos temáticos com auditoria de metadados e resgate de acervos históricos.",
+      "default_stats": {
+        "total_records": 3385,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "b9afa2a6dda1465d2de7a6c42556aaa96c653c51f07b1ff000135219ea06e988",
+        "scraped_at": "2026-11-03T10:23:31Z"
+      },
+      "stats": {
+        "total_records": 3385,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "b9afa2a6dda1465d2de7a6c42556aaa96c653c51f07b1ff000135219ea06e988",
+        "scraped_at": "2026-11-03T10:23:31.335509+00:00",
+        "last_audited_at": "2026-11-09T13:26:40.343569+00:00",
+        "notes": "Acervo de trabalhos científicos individuais apresentados nas edições com anais digitais do Congresso Brasileiro de Biblioteconomia, Documentação e Ciência da Informação (CBBD, 1954–2026), promovido pela FEBAB. Classificação Vermelha (Crítico / Acervo Fragmentado) mantida em conformidade com as diretrizes da BRAN Org em razão do gap de 15 edições históricas (V CBBD e XII ao XXIV CBBD, período 1983–2011) sem anais digitais nos servidores da FEBAB (circulação apenas em impressos e CD-ROMs físicos fora de linha sob custódia de bibliotecas depositárias)."
+      },
+      "schedule": {
+        "id": "cbbd-open-database",
+        "name": "CBBD - Congresso Brasileiro de Biblioteconomia, Documentação e Ciência da Informação",
+        "short_name": "CBBD",
+        "sigla": "CBBD",
+        "check_day": 1,
+        "repo": "BRAN-Org/cbbd-open-database",
+        "url": "https://portal.febab.org.br",
+        "cadence": "biennial-even",
+        "check_months": [
+          7,
+          8
+        ],
+        "summary": "Verificação dos anais do CBBD e atualização do acervo",
+        "description": "Janela bienal para conferir os anais da edição mais recente do CBBD pela FEBAB, minerar novos artigos por eixos temáticos, auditar integridade de metadados e atualizar preservação digital.",
+        "labels": [
+          "curation",
+          "cbbd-open-database"
+        ],
+        "checklist": [
+          "Acessar o portal oficial da FEBAB (https://portal.febab.org.br) e verificar a disponibilização dos anais da última edição",
+          "Executar pipeline de extração dos artigos e metadados por eixo temático",
+          "Validar integridade do schema JSON (`npm run data:validate`)",
+          "Atualizar versão do pacote e registrar alterações no CHANGELOG.md",
+          "Sincronizar acervo e cold storage no Zenodo"
+        ]
+      }
+    },
+    {
+      "id": "ebbc-open-database",
+      "name": "EBBC - Encontro Brasileiro de Bibliometria e Cientometria",
+      "sigla": "EBBC",
+      "type": "Conferência / Anais",
+      "publisher": "Comissão Permanente EBBC",
+      "cadence": "biennial-even",
+      "coverage_years": "2012–2026",
+      "editions": "3ª a 10ª edições",
+      "repo_url": "https://github.com/BRAN-Org/ebbc-open-database",
+      "app_url": "https://ebbc.bran.inf.br",
+      "zenodo_doi": "10.5281/zenodo.10000003",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "description": "Acervo integral colhido diretamente da fonte oficial OJS via OAI-PMH. 100% de conformidade com DOIs canônicos (583 resolvidos e 225 canônicos na ausência de DOI original) e links de PDF diretos.",
+      "default_stats": {
+        "total_records": 808,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "421e6bcf979b0f9c731d6deb4aea9653555324f44f1f532b27ad524dac6100d1",
+        "scraped_at": "2026-11-05T09:47:00Z"
+      },
+      "stats": {
+        "total_records": 808,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "421e6bcf979b0f9c731d6deb4aea9653555324f44f1f532b27ad524dac6100d1",
+        "scraped_at": "2026-11-05T09:47:00Z",
+        "last_audited_at": "2026-11-09T13:23:59.440174+00:00",
+        "notes": "Acervo de anais e conferências EBBC (2012-2026, edições 3ª a 10ª) 100% espelhado diretamente da fonte oficial OJS via API OAI-PMH. Zero DOIs inventados: 583 DOIs reais preservados da fonte e 225 trabalhos sem DOI na origem registrados como N/A com IDs canônicos. 100% de cobertura de PDFs e URLs oficiais."
+      },
+      "schedule": {
+        "id": "ebbc-open-database",
+        "name": "EBBC - Encontro Brasileiro de Bibliometria e Cientometria",
+        "short_name": "EBBC",
+        "sigla": "EBBC",
+        "check_day": 1,
+        "repo": "BRAN-Org/ebbc-open-database",
+        "url": "https://ebbc.inf.br",
+        "cadence": "biennial-even",
+        "check_months": [
+          9,
+          10
+        ],
+        "summary": "Verificação dos anais do EBBC e atualização do dataset",
+        "description": "Janela bienal para conferir a publicação dos anais da edição mais recente do EBBC, raspar novos artigos, validar schema e sincronizar com o Zenodo.",
+        "labels": [
+          "curation",
+          "ebbc-open-database"
+        ],
+        "checklist": [
+          "Acessar o portal oficial do EBBC (https://ebbc.inf.br) e verificar a disponibilização dos anais da última edição",
+          "Executar pipeline de extração e curadoria dos novos artigos e metadados metodológicos",
+          "Validar integridade do schema JSON (`npm run data:validate`)",
+          "Atualizar versão do pacote e registrar alterações no CHANGELOG.md",
+          "Gerar e exportar o novo pacote consolidado para o Zenodo"
+        ]
+      }
+    },
+    {
+      "id": "datagramazero-open-database",
+      "name": "DataGramaZero - Revista de Ciência da Informação",
+      "sigla": "DataGramaZero",
+      "type": "Periódico Científico",
+      "publisher": "Instituto de Informação em Ciência e Tecnologia (Histórico / CEDAP-UFRGS)",
+      "cadence": "historical-archive",
+      "coverage_years": "1999–2015",
+      "editions": "96 fascículos integrais",
+      "repo_url": "https://github.com/BRAN-Org/datagramazero-open-database",
+      "app_url": "https://datagramazero.bran.inf.br",
+      "zenodo_doi": "10.5281/zenodo.10000004",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "description": "Preservação digital censitária dos 96 fascículos da histórica revista DataGramaZero. Reconciliação dos metadados com Base ABCDM/UnB, handles oficiais e recuperação de lacunas históricas.",
+      "default_stats": {
+        "total_records": 487,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "b0d2442eee51374e1dabce14a5b489fc9d045409ba35d1e81823e96a95df30a0",
+        "scraped_at": "2026-10-16T12:12:36Z"
+      },
+      "stats": {
+        "total_records": 487,
+        "health_level": "HIGH_FIDELITY",
+        "raw_data_sha256": "b0d2442eee51374e1dabce14a5b489fc9d045409ba35d1e81823e96a95df30a0",
+        "scraped_at": "2026-10-16T12:12:36Z",
+        "last_audited_at": "2026-11-09T13:27:28.679236+00:00",
+        "notes": "Acervo histórico integral dos 96 fascículos da revista DataGramaZero (1999-2015). Metadados censitários estruturados a partir do dump oficial cedido ao CEDAP/UFRGS e reconciliados contra a Base ABCDM (Faculdade de Ciência da Informação - FCI/UnB), com recuperação das lacunas físicas de jun/2007 (REG 04265) e out/2015 (REG 11205) e enriquecimento de 99,6% de cobertura de resumos."
+      },
+      "schedule": {
+        "id": "datagramazero-open-database",
+        "name": "DataGramaZero - Auditoria de Integridade e Preservação",
+        "short_name": "DataGramaZero",
+        "sigla": "DGZero",
+        "check_day": 1,
+        "repo": "BRAN-Org/datagramazero-open-database",
+        "url": "http://hdl.handle.net/20.500.11959/1269",
+        "cadence": "annual",
+        "check_months": [
+          7
+        ],
+        "summary": "Auditoria de integridade e links do acervo DataGramaZero",
+        "description": "Rotina anual de auditoria fria no acervo histórico (1999-2015) para checagem de links quebrados (DOIs e acervos UFRGS/CEDAP) e integridade do cold storage.",
+        "labels": [
+          "curation",
+          "datagramazero-open-database"
+        ],
+        "checklist": [
+          "Executar checagem de integridade de links externos e handles (CEDAP/UFRGS e repositórios)",
+          "Validar integridade de schema e conformidade de metadados (`npm run data:validate`)",
+          "Garantir integridade do arquivo estático compactado no Zenodo"
+        ]
+      }
+    },
+    {
+      "id": "abec-open-database",
+      "name": "ABEC Meeting - Associação Brasileira de Editores Científicos",
+      "sigla": "ABEC Meeting",
+      "type": "Conferência / Reunião Anual",
+      "publisher": "ABEC Brasil",
+      "cadence": "annual",
+      "coverage_years": "2013–2025",
+      "editions": "Edições anuais catalogadas",
+      "repo_url": "https://github.com/BRAN-Org/abec-open-database",
+      "app_url": "https://abec.bran.inf.br",
+      "zenodo_doi": "10.5281/zenodo.10000005",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "description": "Acervo de anais e resumos dos encontros da ABEC Brasil sobre editoração científica, integridade em pesquisa e indexação internacional.",
+      "default_stats": {
+        "total_records": 259,
+        "health_level": "IN_CURATION",
+        "raw_data_sha256": "341d2f797f2971d482fd2c4ee16cca43a354dbcd2d8e621d0d5d44f722fece9c",
+        "scraped_at": "2026-09-13T14:30:00Z"
+      },
+      "stats": {
+        "total_records": 259,
+        "health_level": "ORANGE",
+        "raw_data_sha256": "341d2f797f2971d482fd2c4ee16cca43a354dbcd2d8e621d0d5d44f722fece9c",
+        "scraped_at": "2026-09-13T14:30:00Z",
+        "last_audited_at": "2026-11-09T13:25:04.160010+00:00",
+        "notes": "Acervo de anais e reuniões científicas da ABEC Brasil (2013-2025) resgatados e padronizados no formato BRAN Org v1. Classificação Laranja (Em Curadoria) com extração realizada com sucesso via OJS e metadados em processo de saneamento contínuo."
+      },
+      "schedule": {
+        "id": "abec-open-database",
+        "name": "ABEC Meeting (Associação Brasileira de Editores Científicos)",
+        "short_name": "ABEC",
+        "sigla": "ABEC",
+        "check_day": 1,
+        "repo": "BRAN-Org/abec-open-database",
+        "url": "https://www.abecbrasil.org.br/",
+        "cadence": "annual",
+        "check_months": [
+          12,
+          1
+        ],
+        "summary": "Verificação dos anais do ABEC Meeting e atualização do dataset",
+        "description": "Janela anual para verificar anais e resumos publicados no portal da ABEC Brasil, atualizar base e acervo de PDFs.",
+        "labels": [
+          "curation",
+          "abec-open-database"
+        ],
+        "checklist": [
+          "Acessar o portal da ABEC Brasil (https://www.abecbrasil.org.br/) e verificar publicação dos anais da edição anual",
+          "Executar rotina de extração de resumos e metadados dos artigos apresentados",
+          "Validar integridade do schema JSON (`npm run data:validate`)",
+          "Atualizar versão e registrar no CHANGELOG.md",
+          "Atualizar cold storage no Zenodo"
+        ]
+      }
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-11-09",
+      "type": "AUDIT",
+      "title": "Auditoria Criptográfica CRONA Concluída",
+      "description": "Auditoria censitária de proveniência executada nas bases ENANCIB e ABEC com validação de integridade SHA-256 e conformidade com o schema article.v1.",
+      "target_id": "enancib-open-database",
+      "badge": "CRONA v2.0",
+      "sha256_short": "005d8860..."
+    },
+    {
+      "date": "2026-11-05",
+      "type": "RELEASE",
+      "title": "EBBC 2026 Ingestão Completa OAI-PMH",
+      "description": "Ingestão censitária da 10ª edição do EBBC (2026) concluída via protocolo OAI-PMH. Total de 808 trabalhos com 100% de cobertura de PDFs.",
+      "target_id": "ebbc-open-database",
+      "badge": "Alta Fidelidade",
+      "sha256_short": "421e6bcf..."
+    },
+    {
+      "date": "2026-11-03",
+      "type": "INTEGRATION",
+      "title": "Resgate de Anais Digitais do CBBD",
+      "description": "Normalização e estruturação dos trabalhos das edições com anais digitais do CBBD (FEBAB). 3.385 registros indexados em eixos temáticos.",
+      "target_id": "cbbd-open-database",
+      "badge": "FEBAB Open",
+      "sha256_short": "b9afa2a6..."
+    },
+    {
+      "date": "2026-10-20",
+      "type": "RELEASE",
+      "title": "Histórico Integral do ENANCIB (1994–2026)",
+      "description": "6.998 artigos catalogados e unificados a partir do portal ANCIB, Benancib e Base ABCDM/UnB, cobrindo todos os 12 GTs da Ciência da Informação.",
+      "target_id": "enancib-open-database",
+      "badge": "6.998 Artigos",
+      "sha256_short": "005d8860..."
+    },
+    {
+      "date": "2026-10-16",
+      "type": "PRESERVATION",
+      "title": "Preservação Censitária DataGramaZero",
+      "description": "Acervo de 96 fascículos da revista DataGramaZero (1999–2015) preservado com cold storage no Zenodo e espelho local no CEDAP/UFRGS.",
+      "target_id": "datagramazero-open-database",
+      "badge": "Zenodo Cold Storage",
+      "sha256_short": "b0d2442e..."
+    }
+  ],
+  "search_index": [
+    {
+      "name": "ENANCIB - Encontro Nacional de Pesquisa e Pós-Graduação em Ciência da Informação",
+      "sigla": "ENANCIB",
+      "type": "Conferência / Anais",
+      "status": "INDEXED",
+      "status_label": "Base Indexada e Auditada",
+      "records": 6998,
+      "coverage": "1994–2026",
+      "health": "GREEN",
+      "app_url": "https://enancib.bran.inf.br",
+      "repo_url": "https://github.com/BRAN-Org/enancib-open-database",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "slug": "/databases#enancib-open-database",
+      "notes": "Acervo histórico integral de todas as 25 edições do ENANCIB com 12 Grupos de Trabalho (GTs) mapeados, 96.7% de resumos e enriquecimento metodológico de autoria e afiliações."
+    },
+    {
+      "name": "CBBD - Congresso Brasileiro de Biblioteconomia, Documentação e Ciência da Informação",
+      "sigla": "CBBD",
+      "type": "Conferência / Anais",
+      "status": "INDEXED",
+      "status_label": "Base Indexada e Auditada",
+      "records": 3385,
+      "coverage": "1954–2026",
+      "health": "HIGH_FIDELITY",
+      "app_url": "https://cbbd.bran.inf.br",
+      "repo_url": "https://github.com/BRAN-Org/cbbd-open-database",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "slug": "/databases#cbbd-open-database",
+      "notes": "Acervo histórico dos anais digitais do CBBD promovido pela FEBAB, estruturado em eixos temáticos com auditoria de metadados e resgate de acervos históricos."
+    },
+    {
+      "name": "EBBC - Encontro Brasileiro de Bibliometria e Cientometria",
+      "sigla": "EBBC",
+      "type": "Conferência / Anais",
+      "status": "INDEXED",
+      "status_label": "Base Indexada e Auditada",
+      "records": 808,
+      "coverage": "2012–2026",
+      "health": "HIGH_FIDELITY",
+      "app_url": "https://ebbc.bran.inf.br",
+      "repo_url": "https://github.com/BRAN-Org/ebbc-open-database",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "slug": "/databases#ebbc-open-database",
+      "notes": "Acervo integral colhido diretamente da fonte oficial OJS via OAI-PMH. 100% de conformidade com DOIs canônicos (583 resolvidos e 225 canônicos na ausência de DOI original) e links de PDF diretos."
+    },
+    {
+      "name": "DataGramaZero - Revista de Ciência da Informação",
+      "sigla": "DataGramaZero",
+      "type": "Periódico Científico",
+      "status": "INDEXED",
+      "status_label": "Base Indexada e Auditada",
+      "records": 487,
+      "coverage": "1999–2015",
+      "health": "HIGH_FIDELITY",
+      "app_url": "https://datagramazero.bran.inf.br",
+      "repo_url": "https://github.com/BRAN-Org/datagramazero-open-database",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "slug": "/databases#datagramazero-open-database",
+      "notes": "Preservação digital censitária dos 96 fascículos da histórica revista DataGramaZero. Reconciliação dos metadados com Base ABCDM/UnB, handles oficiais e recuperação de lacunas históricas."
+    },
+    {
+      "name": "ABEC Meeting - Associação Brasileira de Editores Científicos",
+      "sigla": "ABEC Meeting",
+      "type": "Conferência / Reunião Anual",
+      "status": "INDEXED",
+      "status_label": "Base Indexada e Auditada",
+      "records": 259,
+      "coverage": "2013–2025",
+      "health": "ORANGE",
+      "app_url": "https://abec.bran.inf.br",
+      "repo_url": "https://github.com/BRAN-Org/abec-open-database",
+      "zenodo_url": "https://zenodo.org/communities/bran-org",
+      "slug": "/databases#abec-open-database",
+      "notes": "Acervo de anais e resumos dos encontros da ABEC Brasil sobre editoração científica, integridade em pesquisa e indexação internacional."
+    },
+    {
+      "name": "SNBU - Seminário Nacional de Bibliotecas Universitárias",
+      "sigla": "SNBU",
+      "type": "Conferência",
+      "status": "PROPOSED",
+      "status_label": "Em Planejamento / Backlog",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+SNBU",
+      "notes": "Principal congresso brasileiro de bibliotecas universitárias. Mapeamento de fontes digitais OJS/PDFs em estudo para pipeline de extração.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+SNBU"
+    },
+    {
+      "name": "SBRC - Simpósio Brasileiro de Redes de Computadores e Sistemas Distribuídos",
+      "sigla": "SBRC",
+      "type": "Conferência",
+      "status": "PROPOSED",
+      "status_label": "Em Planejamento / Backlog",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+SBRC",
+      "notes": "Evento da SBC / LARC com anais depositados no SOL/SBCOpenLib. Avaliação de integração com schemas BRAN v1.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+SBRC"
+    },
+    {
+      "name": "CINFORM - Encontro Nacional de Ensino e Pesquisa em Informação",
+      "sigla": "CINFORM",
+      "type": "Conferência",
+      "status": "PROPOSED",
+      "status_label": "Em Planejamento / Backlog",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+CINFORM",
+      "notes": "Tradicional conferência da UFBA. Coleta de anais históricos em andamento preliminar.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+CINFORM"
+    },
+    {
+      "name": "Perspectivas em Ciência da Informação",
+      "sigla": "PCI",
+      "type": "Periódico",
+      "status": "PROPOSED",
+      "status_label": "Em Avaliação de Acervo",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+PCI",
+      "notes": "Periódico científico de referência (UFMG). Acervo OJS / SciELO em processo de análise de metadados.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+PCI"
+    },
+    {
+      "name": "Em Questão - Revista da Faculdade de Biblioteconomia e Comunicação da UFRGS",
+      "sigla": "Em Questão",
+      "type": "Periódico",
+      "status": "PROPOSED",
+      "status_label": "Em Avaliação de Acervo",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Em+Questao",
+      "notes": "Revista científica de destaque em Ciência da Informação e Bibliometria. Avaliação de harvester OAI-PMH.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Em+Questao"
+    },
+    {
+      "name": "Transinformação",
+      "sigla": "Transinformação",
+      "type": "Periódico",
+      "status": "PROPOSED",
+      "status_label": "Em Avaliação de Acervo",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Transinformacao",
+      "notes": "Periódico de circulação internacional (PUC-Campinas). Ingestão via SciELO em estudo.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Transinformacao"
+    },
+    {
+      "name": "Encontros Bibli: revista eletrônica de biblioteconomia e ciência da informação",
+      "sigla": "Encontros Bibli",
+      "type": "Periódico",
+      "status": "PROPOSED",
+      "status_label": "Em Avaliação de Acervo",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Encontros+Bibli",
+      "notes": "Revista da UFSC com acervo OJS aberto.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Encontros+Bibli"
+    },
+    {
+      "name": "Liinc em Revista",
+      "sigla": "Liinc",
+      "type": "Periódico",
+      "status": "PROPOSED",
+      "status_label": "Em Avaliação de Acervo",
+      "records": null,
+      "coverage": "Em Proposta",
+      "health": "PENDING",
+      "app_url": null,
+      "repo_url": null,
+      "zenodo_url": null,
+      "slug": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Liinc",
+      "notes": "Revista interdisciplinar do IBICT / UFRJ com foco em informação, tecnologia e sociedade.",
+      "suggest_url": "https://github.com/BRAN-Org/portal/issues/new?title=Sugest%C3%A3o+de+Base%3A+Liinc"
+    }
+  ]
+}

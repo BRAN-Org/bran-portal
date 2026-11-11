@@ -1,0 +1,245 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { 
+  title, 
+  description = "Portal oficial e catálogo de bases de dados acadêmicas abertas da BRAN Org (Brazilian Research Archive Network). Dados de conferências e periódicos brasileiros com auditoria criptográfica de proveniência.",
+  currentPath = "/"
+} = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>" />
+    <title>{title} — BRAN</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#18181B" />
+
+    <!-- Google Fonts: Playfair Display for editorial headers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#F5F5F4] text-[#18181B] antialiased selection:bg-[#C87D32]/20 selection:text-[#C87D32]">
+    
+    <!-- Top Bar Compacta -->
+    <div class="bg-[#121214] text-[#A1A1AA] text-xs py-1.5 px-4 border-b border-white/5">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-[#C87D32] animate-pulse"></span>
+          <span class="font-medium tracking-wide text-stone-200">BRAN — Brazilian Research Archive Network</span>
+          <span class="hidden sm:inline text-stone-600">|</span>
+          <span class="hidden sm:inline text-[#A1A1AA]">11.937+ trabalhos científicos auditados</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <a href="https://zenodo.org/communities/bran-org" target="_blank" rel="noopener noreferrer" class="hover:text-[#C87D32] transition-colors">Zenodo</a>
+          <a href="https://github.com/BRAN-Org" target="_blank" rel="noopener noreferrer" class="hover:text-[#C87D32] transition-colors">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Header (Graphite #18181B) -->
+    <header class="bg-[#18181B] text-[#F5F5F4] sticky top-0 z-50 shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-14">
+          
+          <!-- Brand Logo: Só "BRAN", clicável para início -->
+          <a href="/" class="group flex items-center py-1" title="Página Inicial da BRAN">
+            <span class="text-2xl sm:text-3xl font-bold font-serif text-[#F5F5F4] tracking-tight group-hover:text-[#C87D32] transition-colors">
+              BRAN
+            </span>
+          </a>
+
+          <!-- Navigation Links com Dropdown estilo Our World in Data -->
+          <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+            <a 
+              href="/databases" 
+              class={`px-3 py-1.5 rounded-md transition-colors ${currentPath.startsWith('/databases') ? 'text-white bg-white/10 font-semibold' : 'text-[#A1A1AA] hover:text-[#F5F5F4] hover:bg-white/5'}`}
+            >
+              Bases de Dados
+            </a>
+
+            <!-- Dropdown Recursos (Resources ▾) -->
+            <div class="relative group">
+              <button 
+                type="button" 
+                class="px-3 py-1.5 rounded-md transition-colors text-[#A1A1AA] hover:text-[#F5F5F4] hover:bg-white/5 flex items-center gap-1 cursor-pointer"
+              >
+                Recursos
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+              
+              <!-- Menu Flutuante Recursos (Off-white #F5F5F4) -->
+              <div class="absolute left-0 mt-1 w-64 rounded-lg bg-[#F5F5F4] text-[#18181B] shadow-2xl border border-[#A1A1AA]/30 py-2 hidden group-hover:block transition-all z-50">
+                <a href="/databases" class="block px-4 py-2 text-sm hover:bg-white hover:text-[#C87D32] transition-colors">
+                  <div class="font-bold">Catálogo de Bases</div>
+                  <div class="text-xs text-[#A1A1AA]">Busca e filtros por evento</div>
+                </a>
+                <a href="/calendario" class="block px-4 py-2 text-sm hover:bg-white hover:text-[#C87D32] transition-colors">
+                  <div class="font-bold">Calendário de Curadoria</div>
+                  <div class="text-xs text-[#A1A1AA]">Janelas anuais e feed iCal</div>
+                </a>
+                <a href="/docs/esquemas" class="block px-4 py-2 text-sm hover:bg-white hover:text-[#C87D32] transition-colors">
+                  <div class="font-bold">Esquemas JSON Canônicos</div>
+                  <div class="text-xs text-[#A1A1AA]">article.v1 e provenance.v1</div>
+                </a>
+                <a href="/docs/api" class="block px-4 py-2 text-sm hover:bg-white hover:text-[#C87D32] transition-colors">
+                  <div class="font-bold">API REST Express</div>
+                  <div class="text-xs text-[#A1A1AA]">Endpoints abertos e OpenAPI</div>
+                </a>
+                <a href="https://zenodo.org/communities/bran-org" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-sm hover:bg-white hover:text-[#C87D32] transition-colors">
+                  <div class="font-bold">Comunidade Zenodo ↗</div>
+                  <div class="text-xs text-[#A1A1AA]">Cold storage e downloads perpétuos</div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Dropdown Sobre (About ▾) -->
+            <div class="relative group">
+              <button 
+                type="button" 
+                class="px-3 py-1.5 rounded-md transition-colors text-[#A1A1AA] hover:text-[#F5F5F4] hover:bg-white/5 flex items-center gap-1 cursor-pointer"
+              >
+                Sobre
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+
+              <!-- Menu Flutuante Sobre (Off-white #F5F5F4) -->
+              <div class="absolute left-0 mt-1 w-60 rounded-lg bg-[#F5F5F4] text-[#18181B] shadow-2xl border border-[#A1A1AA]/30 py-2 hidden group-hover:block transition-all z-50">
+                <a href="/about" class="block px-4 py-2 text-sm font-medium hover:bg-white hover:text-[#C87D32] transition-colors">
+                  Sobre nós (About us)
+                </a>
+                <a href="/about#organizacao" class="block px-4 py-2 text-sm font-medium hover:bg-white hover:text-[#C87D32] transition-colors">
+                  Organização & Governança
+                </a>
+                <a href="/about#financiamento" class="block px-4 py-2 text-sm font-medium hover:bg-white hover:text-[#C87D32] transition-colors">
+                  Financiamento & Infraestrutura
+                </a>
+                <a href="/about#equipe" class="block px-4 py-2 text-sm font-medium hover:bg-white hover:text-[#C87D32] transition-colors">
+                  Equipe & Colaboradores
+                </a>
+                <a href="/docs/curadoria" class="block px-4 py-2 text-sm font-medium hover:bg-white hover:text-[#C87D32] transition-colors">
+                  Contribuir / Curadoria
+                </a>
+                <a href="/faq" class="block px-4 py-2 text-sm font-medium hover:bg-white hover:text-[#C87D32] transition-colors border-t border-[#A1A1AA]/20 mt-1 pt-2">
+                  Perguntas Frequentes (FAQs)
+                </a>
+              </div>
+            </div>
+
+            <a 
+              href="/docs" 
+              class={`px-3 py-1.5 rounded-md transition-colors ${currentPath.startsWith('/docs') ? 'text-white bg-white/10 font-semibold' : 'text-[#A1A1AA] hover:text-[#F5F5F4] hover:bg-white/5'}`}
+            >
+              Documentação
+            </a>
+          </nav>
+
+          <!-- Botões da Direita: Se Inscrever + Submeter Mudanças (#C87D32) -->
+          <div class="flex items-center gap-2">
+            <a 
+              href="/#newsletter" 
+              class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded border border-[#A1A1AA]/40 bg-white/5 hover:bg-white/10 text-[#F5F5F4] hover:border-[#C87D32] transition-colors"
+            >
+              Se Inscrever
+            </a>
+            <a 
+              href="https://github.com/BRAN-Org/portal/issues/new?title=Submiss%C3%A3o+de+Base+ou+Altera%C3%A7%C3%A3o&body=Descreva+as+mudan%C3%A7as+ou+a+nova+base+que+deseja+submeter%3A" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded bg-[#C87D32] hover:bg-[#b06a28] text-white transition-colors shadow-xs"
+            >
+              Submeter Mudanças
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Linha de Destaque Bronze / Amber (#C87D32) -->
+      <div class="h-[2px] bg-[#C87D32] w-full"></div>
+
+    </header>
+
+    <!-- Main Page Content -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Editorial Footer (Graphite #18181B & Bronze #C87D32) -->
+    <footer class="bg-[#18181B] text-[#A1A1AA] mt-20 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Coluna 1: Missão -->
+          <div class="md:col-span-2 space-y-4">
+            <div>
+              <a href="/" class="text-3xl font-bold font-serif text-[#F5F5F4] tracking-tight hover:text-[#C87D32] transition-colors">
+                BRAN
+              </a>
+              <span class="block text-[10px] uppercase tracking-wider text-[#A1A1AA] font-bold mt-0.5">
+                Brazilian Research Archive Network
+              </span>
+            </div>
+            <p class="text-sm text-stone-300 leading-relaxed max-w-md">
+              A <strong>BRAN Org</strong> cataloga, preserva e audita conferências e periódicos científicos em Ciência da Informação e Bibliometria com <strong>100% de dados abertos</strong>, fidelidade criptográfica (SHA-256) e zero identificadores artificiais.
+            </p>
+            <div class="pt-2 text-xs text-[#A1A1AA] font-mono flex flex-wrap gap-4">
+              <span>Licença Código: GPL-3.0</span>
+              <span>•</span>
+              <span>Licença Dados: CC-BY-NC-SA 4.0</span>
+              <span>•</span>
+              <span>Protocolo CRONA v2.0</span>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Bases Canônicas -->
+          <div class="space-y-3">
+            <h4 class="text-xs uppercase tracking-wider text-[#F5F5F4] font-bold">Bases Auditadas</h4>
+            <ul class="text-sm space-y-2 text-[#A1A1AA]">
+              <li><a href="/databases#enancib-open-database" class="hover:text-[#C87D32] transition-colors">ENANCIB (1994–2026)</a></li>
+              <li><a href="/databases#cbbd-open-database" class="hover:text-[#C87D32] transition-colors">CBBD (1954–2026)</a></li>
+              <li><a href="/databases#ebbc-open-database" class="hover:text-[#C87D32] transition-colors">EBBC (2012–2026)</a></li>
+              <li><a href="/databases#datagramazero-open-database" class="hover:text-[#C87D32] transition-colors">DataGramaZero (1999–2015)</a></li>
+              <li><a href="/databases#abec-open-database" class="hover:text-[#C87D32] transition-colors">ABEC Meeting (2013–2025)</a></li>
+            </ul>
+          </div>
+
+          <!-- Coluna 3: Links & Recursos -->
+          <div class="space-y-3">
+            <h4 class="text-xs uppercase tracking-wider text-[#F5F5F4] font-bold">Institucional & Docs</h4>
+            <ul class="text-sm space-y-2 text-[#A1A1AA]">
+              <li><a href="/about" class="hover:text-[#C87D32] transition-colors">Sobre a BRAN Org</a></li>
+              <li><a href="/faq" class="hover:text-[#C87D32] transition-colors">Perguntas Frequentes (FAQs)</a></li>
+              <li><a href="/docs/protocolo-crona" class="hover:text-[#C87D32] transition-colors">Protocolo de Auditoria CRONA</a></li>
+              <li><a href="/docs/esquemas" class="hover:text-[#C87D32] transition-colors">Esquemas JSON Canônicos</a></li>
+              <li><a href="/docs/api" class="hover:text-[#C87D32] transition-colors">Especificação da API REST</a></li>
+              <li><a href="/calendario" class="hover:text-[#C87D32] transition-colors">Calendário iCal (.ics)</a></li>
+              <li><a href="https://zenodo.org/communities/bran-org" target="_blank" rel="noopener noreferrer" class="hover:text-[#C87D32] transition-colors">Comunidade no Zenodo</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#A1A1AA] gap-4">
+          <p>© {new Date().getFullYear()} BRAN — Brazilian Research Archive Network. Dados abertos em favor da ciência pública.</p>
+          <div class="flex items-center gap-4">
+            <a href="https://github.com/BRAN-Org" class="hover:text-[#C87D32] transition-colors">GitHub</a>
+            <span>•</span>
+            <a href="/docs/curadoria" class="hover:text-[#C87D32] transition-colors">Submeter Nova Base</a>
+            <span>•</span>
+            <a href="#top" class="hover:text-[#C87D32] transition-colors">Voltar ao topo ↑</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

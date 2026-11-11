@@ -8,7 +8,8 @@ import {
   calculateScatterData, 
   calculateParetoData 
 } from '../src/statsEngine.js';
-import { getDoiStatus, resolveArticleUrl, generateDatasetCitation, formatItemCitation } from '../public/js/app.js';
+import { getDoiStatus, resolveArticleUrl, generateDatasetCitation, formatItemCitation } from '../src/citationUtils.js';
+
 
 describe('Unit Tests - DataManager & StatsEngine', () => {
   test('normalizeString deve remover acentos e converter para caixa baixa', () => {

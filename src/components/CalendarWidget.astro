@@ -1,0 +1,101 @@
+---
+interface Props {
+  calendar: {
+    current_month: number;
+    current_month_name: string;
+    current_year: number;
+    active_events: Array<any>;
+    upcoming_events: Array<any>;
+    ics_feed_url: string;
+  };
+}
+
+const { calendar } = Astro.props;
+---
+
+<div class="bg-white rounded-xl shadow-xs border border-[#A1A1AA]/30 overflow-hidden h-full flex flex-col hover:border-[#C87D32] transition-all">
+  <div class="p-6 border-b border-stone-100 bg-[#F5F5F4] flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C87D32]">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        Ciclos de Governança
+      </div>
+      <h3 class="text-xl font-bold font-serif text-[#18181B] mt-1">
+        Calendário de Curadoria
+      </h3>
+    </div>
+    <span class="px-2.5 py-1 text-xs font-mono font-bold rounded bg-white text-[#C87D32] border border-[#C87D32]/30">
+      {calendar.current_month_name} / {calendar.current_year}
+    </span>
+  </div>
+
+  <div class="p-6 space-y-6 flex-1 flex flex-col justify-between">
+    <!-- Eventos Ativos no Mês -->
+    <div class="space-y-3">
+      <div class="text-xs font-bold text-[#A1A1AA] uppercase tracking-wider">
+        Janela Ativa Neste Mês
+      </div>
+      {calendar.active_events.length > 0 ? (
+        calendar.active_events.map(ev => (
+          <div class="p-4 rounded-lg bg-[#C87D32]/10 border border-[#C87D32]/30 text-[#18181B]">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-[#C87D32] text-white uppercase">
+                Em Andamento
+              </span>
+              <span class="text-xs font-mono text-[#C87D32]">
+                {ev.cadence === 'annual' ? 'Ciclo Anual' : 'Ciclo Bienal'}
+              </span>
+            </div>
+            <h4 class="font-bold font-serif text-base mt-1.5 text-[#18181B]">{ev.sigla} — {ev.name}</h4>
+            <p class="text-xs text-stone-600 mt-1">{ev.schedule?.summary || ev.description}</p>
+            <div class="mt-3 pt-2 border-t border-[#C87D32]/20 flex items-center justify-between text-xs">
+              <a href={ev.repo_url} target="_blank" rel="noopener noreferrer" class="font-semibold text-[#C87D32] underline hover:text-[#b06a28]">
+                Acompanhar Checklist no GitHub →
+              </a>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div class="p-4 rounded-lg bg-[#F5F5F4] border border-[#A1A1AA]/30 text-stone-600 text-xs">
+          <p class="font-medium text-[#18181B]">Nenhuma conferência em janela de extração no mês de {calendar.current_month_name}.</p>
+          <p class="mt-1 text-stone-500">Bases em auditoria censitária contínua de proveniência SHA-256 (CRONA).</p>
+        </div>
+      )}
+    </div>
+
+    <!-- Próximos Ciclos Programados -->
+    <div class="space-y-3">
+      <div class="text-xs font-bold text-[#A1A1AA] uppercase tracking-wider">
+        Próximas Janelas de Atualização
+      </div>
+      <div class="space-y-2">
+        {calendar.upcoming_events.slice(0, 2).map(ev => (
+          <div class="p-3.5 rounded-lg border border-[#A1A1AA]/30 bg-white hover:border-[#C87D32] transition-colors flex items-start gap-3">
+            <div class="p-2 bg-[#F5F5F4] text-[#C87D32] rounded-md shrink-0 font-serif font-bold text-sm">
+              {ev.schedule?.check_months ? (ev.schedule.check_months[0] === 12 ? 'DEZ' : 'JAN') : 'PRÓX'}
+            </div>
+            <div class="flex-1 min-w-0">
+              <h5 class="text-sm font-bold text-[#18181B] truncate">{ev.sigla} — {ev.name}</h5>
+              <p class="text-xs text-stone-500 line-clamp-1">{ev.schedule?.summary || ev.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Ações e Assinatura iCal -->
+    <div class="pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <a 
+        href={calendar.ics_feed_url}
+        class="inline-flex items-center gap-1.5 font-bold text-[#C87D32] hover:underline"
+        download="bran_curation_calendar.ics"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        Assinar Feed iCal (.ics)
+      </a>
+      <a href="/calendario" class="font-semibold text-stone-600 hover:text-[#18181B]">
+        Ver Grade de 12 Meses →
+      </a>
+    </div>
+  </div>
+</div>

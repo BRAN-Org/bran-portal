@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Sobre a BRAN Org (Brazilian Research Archive Network)" 
+  description="Quem somos, missão, diagnóstico da amnésia digital na ciência brasileira e simbiose com plataformas nacionais."
+  currentPath="/about"
+>
+  <div class="bg-[#18181B] text-[#F5F5F4] py-12 sm:py-16 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#C87D32] text-xs font-semibold mb-4 font-mono">
+          <span>Institucional & Governança</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-bold font-serif tracking-tight text-[#F5F5F4]">
+          Sobre a BRAN
+        </h1>
+        <p class="mt-2 text-xs uppercase tracking-widest text-[#A1A1AA] font-semibold font-mono">
+          Brazilian Research Archive Network
+        </p>
+        <p class="mt-4 text-base sm:text-lg text-stone-300 leading-relaxed font-sans">
+          Uma infraestrutura coletiva e independente dedicada a resgatar, estruturar e preservar a memória científica e bibliométrica do Brasil.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12 text-slate-800 leading-relaxed font-sans">
+    
+    <!-- Seção 1: Missão -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold font-serif text-slate-900 border-b border-slate-200 pb-2">
+        Quem Somos e Nossa Missão
+      </h2>
+      <p>
+        A <strong>BRAN Org (Brazilian Research Archive Network)</strong> atua diretamente sobre os dados acadêmicos públicos que permanecem em um limbo tecnológico: anais de congressos, simpósios de sociedades científicas, encontros de pós-graduação e revistas regionais que não possuem APIs, não oferecem acesso programático ou correm risco iminente de desaparecimento digital (<em>link rot</em>).
+      </p>
+      <p>
+        Coletamos, tratamos, enriquecemos e disponibilizamos esses acervos em formatos abertos e padronizados, através de APIs REST públicas gratuitas, dashboards analíticos e formatos universais de intercâmbio acadêmico (<code class="bg-slate-100 px-1 rounded font-mono text-xs">JSON</code>, <code class="bg-slate-100 px-1 rounded font-mono text-xs">CSV</code>, <code class="bg-slate-100 px-1 rounded font-mono text-xs">BibTeX</code> e <code class="bg-slate-100 px-1 rounded font-mono text-xs">RIS</code>).
+      </p>
+    </section>
+
+    <!-- Seção 2: Diagnóstico da Amnésia Digital -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold font-serif text-slate-900 border-b border-slate-200 pb-2">
+        O Diagnóstico: A Amnésia Digital na Ciência Brasileira
+      </h2>
+      <p>
+        No cenário científico internacional, pesquisadores dispõem de ecossistemas maduros como Crossref, OpenAlex e Semantic Scholar. No Brasil, entretanto, anais de congressos trocam de comissão periodicamente, servidores antigos são desligados sem backup e domínios deixam de ser renovados.
+      </p>
+      <p>
+        O resultado é a <strong>amnésia digital</strong>: centenas de milhares de pesquisas realizadas por professores, mestrandos, doutorandos e bolsistas de iniciação científica (PIBIC) evaporam da internet, transformando trabalhos acadêmicos inteiros em "referências fantasmas".
+      </p>
+
+      <div class="p-5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-950 space-y-2">
+        <div class="font-bold text-sm">Evidência Científica (Klein et al., 2014, PLOS ONE)</div>
+        <p>
+          Estudos demonstraram que <strong>1 em cada 5 artigos acadêmicos</strong> sofre de <em>reference rot</em> (links quebrados ou conteúdos alterados que inviabilizam a checagem da fonte original). Na BRAN Org, combatemos esse fenômeno garantindo cold storage e identificadores canônicos imutáveis.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção 3: Organização & Governança -->
+    <section id="organizacao" class="space-y-4 scroll-mt-24">
+      <h2 class="text-2xl font-bold font-serif text-slate-900 border-b border-slate-200 pb-2">
+        Organização & Governança
+      </h2>
+      <p>
+        Nossa governança adota o modelo canônico upstream/downstream. O repositório central <code class="bg-slate-100 px-1 rounded font-mono text-xs">bran-web-database-template</code> dita as regras de validação de schemas, rotas Express e testes. Cada repositório de dados tem autonomia sobre seus arquivos, mantendo 100% de conformidade técnica com os padrões globais.
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-sm text-slate-700">
+        <li><strong>Zero DOIs Fabricados:</strong> Trabalhos sem DOI original recebem estritamente <code class="font-mono text-xs bg-slate-100 px-1 rounded">doi: "N/A"</code> e slugs canônicos.</li>
+        <li><strong>Fidelidade Criptográfica:</strong> Manifestos <code class="font-mono text-xs bg-slate-100 px-1 rounded">provenance.json</code> auditados com SHA-256.</li>
+        <li><strong>Código Aberto:</strong> Licenciado sob GPL-3.0; Dados sob CC-BY-NC-SA 4.0.</li>
+      </ul>
+    </section>
+
+    <!-- Seção 4: Financiamento & Infraestrutura -->
+    <section id="financiamento" class="space-y-4 scroll-mt-24">
+      <h2 class="text-2xl font-bold font-serif text-slate-900 border-b border-slate-200 pb-2">
+        Financiamento & Infraestrutura Aberta
+      </h2>
+      <p>
+        A BRAN Org opera com arquitetura Jamstack e edge computing (Vercel e Cloudflare Pages), mantendo <strong>custo operacional nulo</strong> para a comunidade. A preservação perpétua é viabilizada pela infraestrutura pública do <strong>CERN / Zenodo</strong>, garantindo que os dados sobrevivam independentemente de servidores individuais.
+      </p>
+    </section>
+
+    <!-- Seção 5: Equipe e Conselho -->
+    <section id="equipe" class="space-y-4 scroll-mt-24">
+      <h2 class="text-2xl font-bold font-serif text-slate-900 border-b border-slate-200 pb-2">
+        Equipe & Colaboradores
+      </h2>
+      <p>
+        Mantida por cientometristas, bibliotecários, cientistas da informação e engenheiros de software dedicados à ciência aberta e à reprodutibilidade de dados na América Latina.
+      </p>
+      <div class="pt-2">
+        <a 
+          href="https://github.com/BRAN-Org" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#082346] text-white text-xs font-semibold hover:bg-[#004c8c] transition-colors"
+        >
+          Conhecer a Organização no GitHub ↗
+        </a>
+      </div>
+    </section>
+
+  </div>
+</Layout>

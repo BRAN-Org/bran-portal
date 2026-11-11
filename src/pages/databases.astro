@@ -1,0 +1,356 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ecosystemData from '../data/ecosystem.json';
+
+const { databases, search_index } = ecosystemData;
+
+// Filtra apenas as não-indexadas que estão em proposta
+const proposedSources = search_index.filter(item => item.status === 'PROPOSED');
+---
+
+<Layout 
+  title="Catálogo de Bases de Dados & Eventos" 
+  description="Catálogo completo de bases de dados e eventos científicos auditados pela BRAN Org com busca multifacetada, filtros por periodicidade e downloads canônicos."
+  currentPath="/databases"
+>
+  <div class="bg-[#18181B] text-[#F5F5F4] border-b border-white/10 py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C87D32] mb-2 font-mono">
+          <span>Acervos & Coleções Canônicas</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold font-serif text-[#F5F5F4] tracking-tight">
+          Bases de Dados & Eventos Científicos
+        </h1>
+        <p class="mt-3 text-base text-stone-300 leading-relaxed font-sans">
+          Explore o catálogo oficial de dados abertos da BRAN Org. Todas as bases operam sob o padrão de integridade do template Express unificado, com esquemas canônicos validados e depósitos no Zenodo.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- Barra de Busca & Filtros por Facetas -->
+    <div class="bg-white rounded-xl border border-[#A1A1AA]/30 p-6 shadow-xs space-y-6">
+      <!-- Search Input -->
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#A1A1AA]">
+          <svg class="w-5 h-5 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input 
+          type="text" 
+          id="db-filter-input"
+          placeholder="Filtrar por nome, sigla, editora ou palavras-chave (ex: ENANCIB, FEBAB, OJS, bibliometria)..." 
+          class="w-full pl-11 pr-4 py-3 text-sm text-[#18181B] bg-[#F5F5F4] border border-[#A1A1AA]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C87D32] focus:bg-white transition-all placeholder:text-[#A1A1AA]"
+        />
+      </div>
+
+      <!-- Filtros Facetados -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100 text-xs">
+        <!-- Faceta Tipo -->
+        <div>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tipo de Acervo</label>
+          <select id="facet-type" class="w-full py-2 px-3 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#004c8c]">
+            <option value="all">Todos os tipos</option>
+            <option value="Conferência">Conferência / Anais</option>
+            <option value="Periódico">Periódico Científico</option>
+          </select>
+        </div>
+
+        <!-- Faceta Periodicidade -->
+        <div>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Periodicidade</label>
+          <select id="facet-cadence" class="w-full py-2 px-3 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#004c8c]">
+            <option value="all">Todas as periodicidades</option>
+            <option value="annual">Anual</option>
+            <option value="biennial">Bienal</option>
+            <option value="historical">Acervo Histórico Estático</option>
+          </select>
+        </div>
+
+        <!-- Faceta Classificação -->
+        <div>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Classificação / Saúde</label>
+          <select id="facet-health" class="w-full py-2 px-3 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#004c8c]">
+            <option value="all">Todas as classificações</option>
+            <option value="HIGH_FIDELITY">Auditado (Alta Fidelidade / Verde)</option>
+            <option value="IN_CURATION">Em Curadoria (Laranja)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Contador de Resultados -->
+      <div class="flex items-center justify-between pt-2 text-xs text-slate-500 font-mono">
+        <span id="results-count">Exibindo {databases.length} de {databases.length} bases canônicas</span>
+        <button id="reset-filters-btn" class="text-[#004c8c] hover:underline cursor-pointer hidden">
+          Limpar filtros ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Lista de Cards das Bases Canônicas -->
+    <div id="databases-grid" class="mt-8 space-y-6">
+      {databases.map(db => (
+        <article 
+          id={db.id}
+          class="database-card bg-white rounded-xl border border-slate-200 p-6 sm:p-8 hover:border-slate-300 transition-all shadow-2xs"
+          data-name={db.name.toLowerCase()}
+          data-sigla={db.sigla.toLowerCase()}
+          data-publisher={db.publisher.toLowerCase()}
+          data-description={db.description.toLowerCase()}
+          data-type={db.type}
+          data-cadence={db.cadence}
+          data-health={db.stats.health_level}
+        >
+          <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+            <div class="space-y-3 flex-1">
+              <!-- Top Badges -->
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-1 text-xs font-bold font-mono rounded bg-[#092340] text-white">
+                  {db.sigla}
+                </span>
+                <span class="px-2.5 py-1 text-xs font-medium rounded bg-slate-100 text-slate-700">
+                  {db.type}
+                </span>
+                <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-slate-100 text-slate-600">
+                  {db.cadence === 'annual' ? 'Cadência Anual' : (db.cadence.startsWith('biennial') ? 'Cadência Bienal' : 'Acervo Histórico')}
+                </span>
+                <span class={`px-2.5 py-1 text-xs font-bold rounded ${db.stats.health_level === 'HIGH_FIDELITY' || db.stats.health_level === 'GREEN' ? 'bg-emerald-50 text-emerald-800 border border-emerald-300' : 'bg-amber-50 text-amber-800 border border-amber-300'}`}>
+                  {db.stats.health_level === 'HIGH_FIDELITY' || db.stats.health_level === 'GREEN' ? '✓ Auditado (Alta Fidelidade)' : 'Em Curadoria Contínua'}
+                </span>
+              </div>
+
+              <!-- Title & Publisher -->
+              <h2 class="text-2xl font-bold font-serif text-slate-900 leading-tight">
+                {db.name}
+              </h2>
+              <div class="text-xs text-slate-500 font-medium">
+                Organização / Editora Depositária: <strong class="text-slate-700">{db.publisher}</strong>
+              </div>
+
+              <!-- Description -->
+              <p class="text-sm text-slate-600 leading-relaxed pt-1">
+                {db.description}
+              </p>
+
+              <!-- Provenance Notes if available -->
+              {db.stats.notes && (
+                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 text-xs text-slate-600 font-sans">
+                  <strong class="text-slate-800 font-medium">Nota de Proveniência:</strong> {db.stats.notes}
+                </div>
+              )}
+            </div>
+
+            <!-- Stats Box (OWID Style) -->
+            <div class="w-full lg:w-72 shrink-0 bg-slate-50/70 rounded-xl p-5 border border-slate-200/80 space-y-3 text-xs">
+              <div>
+                <span class="text-slate-500 block uppercase tracking-wider font-semibold text-[10px]">Total de Registros</span>
+                <span class="text-2xl font-bold font-serif text-slate-900">{db.stats.total_records.toLocaleString('pt-BR')}</span>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between">
+                <span class="text-slate-500">Cobertura:</span>
+                <span class="font-bold text-slate-800">{db.coverage_years}</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500">Edições:</span>
+                <span class="font-medium text-slate-800">{db.editions}</span>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200/60">
+                <span class="text-slate-500 block text-[10px] uppercase tracking-wider font-semibold">Assinatura SHA-256</span>
+                <span class="font-mono text-[11px] text-slate-700 block truncate select-all bg-white p-1 rounded border border-slate-200 mt-0.5" title={db.stats.raw_data_sha256}>
+                  {db.stats.raw_data_sha256}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div class="mt-6 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex flex-wrap items-center gap-2">
+              <a 
+                href={db.app_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-2 font-semibold rounded-md bg-[#092340] text-white hover:bg-[#004c8c] transition-colors inline-flex items-center gap-1.5"
+              >
+                Explorar Web App & API ↗
+              </a>
+              <a 
+                href={db.zenodo_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-3.5 py-2 font-semibold rounded-md border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors inline-flex items-center gap-1.5"
+              >
+                Zenodo Cold Storage ↗
+              </a>
+              <a 
+                href={db.repo_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-3.5 py-2 font-semibold rounded-md border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors inline-flex items-center gap-1.5"
+              >
+                Código no GitHub ↗
+              </a>
+            </div>
+
+            <a 
+              href="/docs/esquemas" 
+              class="font-medium text-slate-500 hover:text-[#004c8c] hover:underline"
+            >
+              Consultar Schema JSON (article.v1) →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Empty state for filter -->
+    <div id="no-results-state" class="hidden text-center py-16 bg-white rounded-xl border border-slate-200 mt-8">
+      <div class="inline-flex p-3 rounded-full bg-slate-100 text-slate-400 mb-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </div>
+      <h3 class="text-lg font-bold font-serif text-slate-900">Nenhuma base encontrada para os filtros selecionados</h3>
+      <p class="text-sm text-slate-600 mt-1">Tente remover os termos de busca ou redefinir as facetas.</p>
+    </div>
+
+    <!-- Seção de Fontes no Backlog / Propostas -->
+    <div class="mt-16 bg-slate-50/80 rounded-2xl border border-slate-200 p-8 sm:p-10">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#004c8c]">
+          Expansão do Ecossistema
+        </span>
+        <h3 class="text-2xl font-bold font-serif text-slate-900 mt-1">
+          Fontes em Fila de Avaliação & Propostas da Comunidade
+        </h3>
+        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+          As fontes abaixo foram sugeridas por pesquisadores e bibliotecários e estão em fase de estudo de viabilidade técnica (verificação de repositórios OJS, disponibilidade de metadados e integridade de DOIs).
+        </p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+        {proposedSources.map(source => (
+          <div class="bg-white p-5 rounded-lg border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
+                {source.sigla}
+              </span>
+              <span class="text-xs font-mono text-slate-400">{source.type}</span>
+            </div>
+            <h4 class="font-serif font-bold text-base text-slate-900">{source.name}</h4>
+            <p class="text-xs text-slate-600">{source.notes}</p>
+            <div class="pt-2">
+              <a 
+                href={source.suggest_url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-xs font-semibold text-[#004c8c] hover:underline"
+              >
+                Acompanhar Issue / Sugerir Dados no GitHub ↗
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Client-side reactive filtering script (0ms latency, zero external libraries) -->
+  <script>
+    function setupFilters() {
+      const input = document.getElementById('db-filter-input');
+      const typeSelect = document.getElementById('facet-type');
+      const cadenceSelect = document.getElementById('facet-cadence');
+      const healthSelect = document.getElementById('facet-health');
+      const resultsCount = document.getElementById('results-count');
+      const resetBtn = document.getElementById('reset-filters-btn');
+      const emptyState = document.getElementById('no-results-state');
+      const cards = Array.from(document.querySelectorAll('.database-card'));
+
+      if (!input || !typeSelect || !cards.length) return;
+
+      function normalize(str) {
+        return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      }
+
+      function filterCards() {
+        const query = normalize(input.value);
+        const selectedType = typeSelect.value;
+        const selectedCadence = cadenceSelect.value;
+        const selectedHealth = healthSelect.value;
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const name = card.getAttribute('data-name') || '';
+          const sigla = card.getAttribute('data-sigla') || '';
+          const publisher = card.getAttribute('data-publisher') || '';
+          const description = card.getAttribute('data-description') || '';
+          const type = card.getAttribute('data-type') || '';
+          const cadence = card.getAttribute('data-cadence') || '';
+          const health = card.getAttribute('data-health') || '';
+
+          const matchesQuery = !query || 
+            name.includes(query) || 
+            sigla.includes(query) || 
+            publisher.includes(query) || 
+            description.includes(query);
+
+          const matchesType = selectedType === 'all' || type.includes(selectedType);
+
+          const matchesCadence = selectedCadence === 'all' || 
+            (selectedCadence === 'annual' && cadence === 'annual') ||
+            (selectedCadence === 'biennial' && cadence.startsWith('biennial')) ||
+            (selectedCadence === 'historical' && cadence.includes('historical'));
+
+          const matchesHealth = selectedHealth === 'all' || 
+            (selectedHealth === 'HIGH_FIDELITY' && (health === 'HIGH_FIDELITY' || health === 'GREEN')) ||
+            (selectedHealth === 'IN_CURATION' && (health === 'IN_CURATION' || health === 'ORANGE'));
+
+          if (matchesQuery && matchesType && matchesCadence && matchesHealth) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        resultsCount.textContent = `Exibindo ${visibleCount} de ${cards.length} bases canônicas`;
+
+        const hasActiveFilters = query || selectedType !== 'all' || selectedCadence !== 'all' || selectedHealth !== 'all';
+        if (hasActiveFilters) {
+          resetBtn.classList.remove('hidden');
+        } else {
+          resetBtn.classList.add('hidden');
+        }
+
+        if (visibleCount === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      }
+
+      input.addEventListener('input', filterCards);
+      typeSelect.addEventListener('change', filterCards);
+      cadenceSelect.addEventListener('change', filterCards);
+      healthSelect.addEventListener('change', filterCards);
+
+      resetBtn.addEventListener('click', () => {
+        input.value = '';
+        typeSelect.value = 'all';
+        cadenceSelect.value = 'all';
+        healthSelect.value = 'all';
+        filterCards();
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupFilters);
+    } else {
+      setupFilters();
+    }
+  </script>
+</Layout>

@@ -1,0 +1,81 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout 
+  title="Especificação da API REST" 
+  description="Documentação completa das rotas da API Express (v1.6) compartilhada por todos os repositórios da BRAN Org."
+  activeDoc="api"
+>
+  <div class="space-y-6">
+    <div class="border-b border-slate-200 pb-4">
+      <h1 class="text-3xl font-bold font-serif text-slate-900">Especificação da API REST (Engine v1.6)</h1>
+      <p class="text-slate-500 text-sm mt-1">Endpoints compartilhados por todos os repositórios downstream da BRAN Org</p>
+    </div>
+
+    <p class="text-base text-slate-700 leading-relaxed">
+      Cada base de dados publicada pela BRAN Org expõe uma API REST uniforme, leve e com suporte a paginação censitária, filtros facetados, cálculos cientométricos e exportação direta em múltiplos formatos acadêmicos.
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-2">Principais Endpoints</h2>
+    <div class="space-y-4 not-prose text-xs">
+      <!-- Endpoint 1 -->
+      <div class="p-4 rounded-lg bg-white border border-slate-200 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono">GET</span>
+          <code class="font-mono text-sm text-slate-900">/api/v1/articles</code>
+        </div>
+        <p class="text-slate-600">
+          Consulta paginada e filtrada de trabalhos.
+        </p>
+        <div class="text-[11px] font-mono text-slate-500 bg-slate-50 p-2 rounded">
+          Query Params: ?q=termo&page=1&limit=25&year=2024&track=GT1&sort=year&order=desc
+        </div>
+      </div>
+
+      <!-- Endpoint 2 -->
+      <div class="p-4 rounded-lg bg-white border border-slate-200 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono">GET</span>
+          <code class="font-mono text-sm text-slate-900">/api/v1/articles/:key</code>
+        </div>
+        <p class="text-slate-600">
+          Recupera o registro canônico integral pelo ID (ex: <code class="bg-slate-100 px-1 rounded">ebbc-2024-001</code>) ou DOI sanitizado.
+        </p>
+      </div>
+
+      <!-- Endpoint 3 -->
+      <div class="p-4 rounded-lg bg-white border border-slate-200 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono">GET</span>
+          <code class="font-mono text-sm text-slate-900">/api/v1/stats</code>
+        </div>
+        <p class="text-slate-600">
+          Estatísticas cientométricas agregadas: contagem total de trabalhos, total de autores únicos, distribuição temporal por ano e distribuição por eixos/GTs.
+        </p>
+      </div>
+
+      <!-- Endpoint 4 -->
+      <div class="p-4 rounded-lg bg-white border border-slate-200 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono">GET</span>
+          <code class="font-mono text-sm text-slate-900">/api/v1/export/:format</code>
+        </div>
+        <p class="text-slate-600">
+          Exportação sob demanda da base inteira ou filtrada nos formatos: <code class="bg-slate-100 px-1 rounded">json</code>, <code class="bg-slate-100 px-1 rounded">csv</code>, <code class="bg-slate-100 px-1 rounded">bibtex</code>, <code class="bg-slate-100 px-1 rounded">ris</code> e <code class="bg-slate-100 px-1 rounded">zip</code>.
+        </p>
+      </div>
+
+      <!-- Endpoint 5 -->
+      <div class="p-4 rounded-lg bg-white border border-slate-200 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono">GET</span>
+          <code class="font-mono text-sm text-slate-900">/api/v1/openapi.json</code>
+        </div>
+        <p class="text-slate-600">
+          Especificação técnica OpenAPI 3.0 para geração automatizada de clientes em Python, R (<code class="bg-slate-100 px-1 rounded">bibliolatam</code>) e TypeScript.
+        </p>
+      </div>
+    </div>
+  </div>
+</DocsLayout>

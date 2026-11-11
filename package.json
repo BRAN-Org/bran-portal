@@ -1,33 +1,47 @@
 {
-  "name": "bran-web-database-template",
-  "version": "1.6.0",
-  "description": "Template leve e reproduzível para APIs REST públicas e Dashboards de bases de dados acadêmicas da BRAN Org.",
+  "name": "bran-portal",
+  "version": "2.0.0",
+  "description": "Portal público oficial e API REST federada da BRAN Org para Ciência da Informação e Cientometria.",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js",
-    "build": "node scripts/fetch_datasets.js",
-    "data:sync": "node scripts/fetch_datasets.js",
-    "test": "NODE_ENV=test node --test tests/unit.test.js tests/api.test.js",
-    "data:convert": "node scripts/convert_csv_to_json.js",
+    "dev": "astro dev",
+    "dev:api": "node --watch server.js",
+    "build": "node scripts/sync_data.js && astro build",
+    "preview": "astro preview",
+    "test": "NODE_ENV=test node --test tests/unit.test.js tests/api.test.js tests/portal.test.js",
+    "test:api": "NODE_ENV=test node --test tests/unit.test.js tests/api.test.js",
+    "test:portal": "node --test tests/portal.test.js",
+    "data:sync": "node scripts/sync_data.js",
     "data:validate": "node scripts/validate_dataset.js",
+    "data:convert": "node scripts/convert_csv_to_json.js",
     "data:audit": "python3 scripts/crona_audit_engine.py --file data/*.json --schema schemas/article.v1.schema.json",
-    "data:bundle": "python3 scripts/crona_zenodo_sync.py",
-    "init:event": "node scripts/init_event.js"
+    "data:bundle": "python3 scripts/crona_zenodo_sync.py"
   },
   "keywords": [
     "open-data",
     "bran-org",
-    "api",
     "academic-data",
-    "database-template",
-    "express"
+    "portal",
+    "api",
+    "astro",
+    "express",
+    "scientometrics"
   ],
   "author": "BRAN Org",
-  "license": "GPL-3.0-or-later AND CC-BY-NC-SA-4.0",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.10",
     "cors": "^2.8.5",
-    "express": "^5.0.0"
+    "express": "^5.0.0",
+    "js-yaml": "^5.5.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "overrides": {
+    "cookie": "^2.0.2"
   }
 }
+
+

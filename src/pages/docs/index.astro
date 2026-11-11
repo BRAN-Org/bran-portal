@@ -1,0 +1,71 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout 
+  title="Visão Geral da BRAN Org" 
+  description="Filosofia, topologia e padrões de dados abertos para a Ciência da Informação e Cientometria."
+  activeDoc="intro"
+>
+  <div class="space-y-6">
+    <div class="border-b border-slate-200 pb-4">
+      <h1 class="text-3xl font-bold font-serif text-slate-900">Visão Geral da BRAN Org</h1>
+      <p class="text-slate-500 text-sm mt-1">Rede Brasileira de Acesso Aberto à Produção Científica</p>
+    </div>
+
+    <p class="text-base text-slate-700 leading-relaxed">
+      A <strong>BRAN Org</strong> é uma iniciativa independente dedicada a resgatar, estruturar, padronizar e auditar a produção científica brasileira em Ciência da Informação, Biblioteconomia e Cientometria.
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-4">Princípios Fundamentais</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose">
+      <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
+        <div class="font-bold text-slate-900 text-sm">1. Zero DOIs Fictícios</div>
+        <div class="text-xs text-slate-600 leading-relaxed">
+          Se o artigo original não possui DOI na publicação fonte, registramos estritamente como <code class="font-mono bg-white px-1 py-0.5 rounded border border-slate-200">doi: "N/A"</code> e geramos um slug canônico auditável. Jamais inventamos identificadores.
+        </div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
+        <div class="font-bold text-slate-900 text-sm">2. Fidelidade Criptográfica (SHA-256)</div>
+        <div class="text-xs text-slate-600 leading-relaxed">
+          Cada modificação em base de dados gera um novo checksum SHA-256 registrado no arquivo canônico <code class="font-mono bg-white px-1 py-0.5 rounded border border-slate-200">provenance.json</code>.
+        </div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
+        <div class="font-bold text-slate-900 text-sm">3. 100% Código & Dados Abertos</div>
+        <div class="text-xs text-slate-600 leading-relaxed">
+          Código sob licença GPL-3.0 e dados em Acesso Aberto sob licença CC-BY-NC-SA 4.0, sem restrições proprietárias de consulta.
+        </div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
+        <div class="font-bold text-slate-900 text-sm">4. Preservação Fria no Zenodo</div>
+        <div class="text-xs text-slate-600 leading-relaxed">
+          Cada versão de base é depositada como bundle autônomo no repositório CERN/Zenodo com DOI global e garantia de preservação de longo prazo.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-6">Topologia dos Repositórios</h2>
+    <p class="text-sm text-slate-700 leading-relaxed">
+      A governança da organização opera no modelo <strong>Upstream / Downstream</strong>:
+    </p>
+
+    <div class="p-4 bg-slate-900 text-slate-100 rounded-lg font-mono text-xs overflow-x-auto not-prose">
+      <pre><code>[Repositório Central Upstream]
+BRAN-Org/bran-web-database-template (Engine Express, API, Testes, Schemas)
+       │
+       ├──> [Downstream] ebbc-open-database
+       ├──> [Downstream] enancib-open-database
+       ├──> [Downstream] abec-open-database
+       ├──> [Downstream] cbbd-open-database
+       └──> [Downstream] datagramazero-open-database</code></pre>
+    </div>
+
+    <p class="text-sm text-slate-600 leading-relaxed">
+      Nenhuma alteração na engine de rotas ou na interface web é feita de forma isolada nos repositórios downstream. Todas as melhorias nascem no <code class="font-mono text-xs bg-slate-100 px-1 rounded">bran-web-database-template</code> e são sincronizadas automaticamente via GitHub Actions.
+    </p>
+  </div>
+</DocsLayout>
