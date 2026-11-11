@@ -43,7 +43,8 @@ O portal integra ~12.000 artigos acadêmicos diretamente em memória, provendo c
   - `GET /api/v1/articles/export`: Exportação sob demanda em CSV, BibTeX, RIS e JSON.
   - `GET /api/v1/articles/stats`: Métricas cientométricas agregadas ou filtradas por base.
   - `GET /api/v1/openapi.json`: Especificação completa OpenAPI 3.0.
-- **Interface Web Simples e Responsiva**: Dashboard com gráficos SVG nativos via [`pure-svg-charts`](https://github.com/GabrielBaiano/pure-svg-charts), sem dependência de bibliotecas pesadas de CDN.
+  - `GET /api/v1/openapi.json`: Especificação completa OpenAPI 3.0.
+- **Interface Editorial e Jamstack (Inspirada no Our World in Data)**: Portal estático ultraveloz compilado em Astro 7 com Tailwind CSS v4, rede vetorial de coautoria e fluxos de citação animada, verificador instantâneo de periódicos ("Existe na BRAN?"), catálogo com busca facetada e calendário de curadoria sincronizado.
 
 ---
 
@@ -51,27 +52,36 @@ O portal integra ~12.000 artigos acadêmicos diretamente em memória, provendo c
 
 ### 1. Clonar e Instalar
 ```bash
-git clone https://github.com/BRAN-Org/bran-web-database-template.git bran-portal
+git clone https://github.com/BRAN-Org/bran-portal.git
 cd bran-portal
 npm install
 ```
 
-### 2. Sincronizar Datasets
+### 2. Sincronizar Datasets e Compilar o Portal
 ```bash
-# Copia datasets dos repositórios locais irmãos ou baixa diretamente via GitHub Raw:
-npm run data:sync
+# Compila o portal estático com Astro e sincroniza os datasets canônicos:
+npm run build
 ```
 
-### 3. Rodar Testes Automatizados
+### 3. Rodar Testes Automatizados (36 Testes)
 ```bash
+# Executa testes unitários, testes da API REST e validação da distribuição estática:
 npm test
 ```
 
-### 4. Iniciar Servidor
+### 4. Iniciar Servidor Unificado (Portal + API REST)
 ```bash
 npm start
 # Acesse o portal em http://localhost:3000
+# Documentação da API em http://localhost:3000/docs/api
 ```
+
+### 5. Modo de Desenvolvimento (Hot-reload)
+```bash
+npm run dev
+# Acesse o ambiente de desenvolvimento em http://localhost:4321
+```
+
 
 ---
 
