@@ -47,45 +47,45 @@
   }
 }
 
-@keyframes nodePulseGlow {
+@keyframes hubBreathe {
   0%, 100% {
-    transform: scale(1);
-    opacity: 0.85;
+    transform: scale(0.92);
+    opacity: 0.35;
   }
   50% {
     transform: scale(1.15);
-    opacity: 1;
+    opacity: 0.7;
   }
 }
 
 @keyframes haloWave {
   0% {
     r: 6px;
-    opacity: 0.7;
+    opacity: 0.8;
   }
   100% {
-    r: 22px;
+    r: 26px;
     opacity: 0;
   }
 }
 
 .citation-flow-line {
   stroke-dasharray: 6 8;
-  animation: citationFlow 6s linear infinite;
+  animation: citationFlow 7s linear infinite;
 }
 
 .citation-flow-fast {
   stroke-dasharray: 4 6;
-  animation: citationFlow 3.5s linear infinite;
+  animation: citationFlow 4s linear infinite;
 }
 
-.node-hub-pulse {
+.node-hub-breathe {
   transform-box: fill-box;
   transform-origin: center;
-  animation: nodePulseGlow 3.5s ease-in-out infinite;
+  animation: hubBreathe 4s ease-in-out infinite;
 }
 
 .halo-wave {
-  animation: haloWave 3.2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+  animation: haloWave 3.5s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
 }
 
