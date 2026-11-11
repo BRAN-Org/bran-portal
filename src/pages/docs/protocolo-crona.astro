@@ -1,0 +1,65 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout 
+  title="Protocolo CRONA de Auditoria" 
+  description="Protocolo de auditoria criptográfica e verificação contínua de integridade da BRAN Org."
+  activeDoc="crona"
+>
+  <div class="space-y-6">
+    <div class="border-b border-slate-200 pb-4">
+      <h1 class="text-3xl font-bold font-serif text-slate-900">Protocolo CRONA & Auditoria Criptográfica</h1>
+      <p class="text-slate-500 text-sm mt-1">Mecanismo automatizado de auditoria censitária e integridade de proveniência</p>
+    </div>
+
+    <p class="text-base text-slate-700 leading-relaxed">
+      O <strong>CRONA</strong> (Continuous Reproducibility & Open-data Network Auditor) é a suíte de auditoria contínua desenvolvida pela BRAN Org para assegurar que nenhum dado acadêmico sofra alterações silenciosas, corrupção de metadados ou inventação de identificadores.
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-2">Classificação de Saúde das Bases</h2>
+    <div class="space-y-3 not-prose">
+      <div class="p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-xs">
+        <div class="font-bold text-emerald-950 text-sm flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          Verde / HIGH_FIDELITY (Auditado com Alta Fidelidade)
+        </div>
+        <p class="text-emerald-900 mt-1">
+          100% dos trabalhos catalogados diretamente da fonte primária (OJS ou repositório institucional), conformidade total com o schema JSON, 100% de DOIs reais ou canônicos e hash SHA-256 verificado.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-lg bg-amber-50 border border-amber-200 text-xs">
+        <div class="font-bold text-amber-950 text-sm flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+          Laranja / IN_CURATION (Em Curadoria Contínua)
+        </div>
+        <p class="text-amber-900 mt-1">
+          Base já extraída e operacional, porém em processo contínuo de saneamento de resumos, padronização de afiliações ou resolução de DOIs históricos.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-lg bg-rose-50 border border-rose-200 text-xs">
+        <div class="font-bold text-rose-950 text-sm flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+          Vermelho / HISTORICAL_GAP (Acervo Fragmentado Histórico)
+        </div>
+        <p class="text-rose-900 mt-1">
+          Bases com lacunas físicas externas causadas por edições históricas sem anais digitais nos servidores da entidade promotora (ex: anais impressos sob custódia de bibliotecas depositárias).
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-4">Comandos de Auditoria Local</h2>
+    <div class="p-4 bg-slate-900 text-slate-100 rounded-lg font-mono text-xs overflow-x-auto not-prose">
+      <pre><code># Validar se o dataset respeita 100% do schema article.v1
+npm run data:validate
+
+# Executar a engine CRONA para auditoria criptográfica e checagem de links
+npm run data:audit
+
+# Testes de regressão da API Express
+npm test</code></pre>
+    </div>
+  </div>
+</DocsLayout>

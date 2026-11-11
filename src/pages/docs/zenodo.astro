@@ -1,0 +1,40 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout 
+  title="Preservação Digital no Zenodo" 
+  description="Protocolo de cold storage, geração de bundles e comunidade Zenodo da BRAN Org."
+  activeDoc="zenodo"
+>
+  <div class="space-y-6">
+    <div class="border-b border-slate-200 pb-4">
+      <h1 class="text-3xl font-bold font-serif text-slate-900">Preservação Digital no Zenodo (CERN)</h1>
+      <p class="text-slate-500 text-sm mt-1">Garantia de custódia e acesso aberto perpétuo à produção científica</p>
+    </div>
+
+    <p class="text-base text-slate-700 leading-relaxed">
+      A <strong>BRAN Org</strong> utiliza a infraestrutura de dados abertos do <strong>Zenodo (CERN / OpenAIRE)</strong> como repositório de custódia fria (<em>cold storage</em>).
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-2">Comunidade Oficial</h2>
+    <p class="text-sm text-slate-700 leading-relaxed">
+      Todos os depósitos das 5 bases canônicas e seus respectivos releases históricos estão agrupados sob a comunidade oficial:
+      <br />
+      👉 <a href="https://zenodo.org/communities/bran-org" target="_blank" rel="noopener noreferrer" class="font-bold text-[#004c8c] underline">zenodo.org/communities/bran-org</a>
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-4">Conteúdo de Cada Bundle de Preservação</h2>
+    <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg text-xs space-y-2 not-prose">
+      <div class="font-bold text-slate-900 text-sm">Estrutura do Arquivo de Depósito (.zip / .tar.gz):</div>
+      <ul class="list-disc list-inside space-y-1 font-mono text-slate-700">
+        <li><code>data/&lt;evento&gt;_articles.json</code> (Dados estruturados JSON)</li>
+        <li><code>data/&lt;evento&gt;_articles.csv</code> (Tabela tabular normalizada)</li>
+        <li><code>data/&lt;evento&gt;_articles.sqlite</code> (Banco SQLite autônomo)</li>
+        <li><code>provenance.json</code> (Manifesto com hash SHA-256 e logs do auditor CRONA)</li>
+        <li><code>CITATION.cff</code> (Metadados de citação canônica)</li>
+        <li><code>README.md</code> e <code>CHANGELOG.md</code> (Histórico de alterações e auditorias)</li>
+      </ul>
+    </div>
+  </div>
+</DocsLayout>

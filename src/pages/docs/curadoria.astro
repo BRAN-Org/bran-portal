@@ -1,0 +1,51 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout 
+  title="Guia de Ingestão & Governança de DOIs" 
+  description="Diretrizes para curadoria, extração de anais e política estrita de identificadores (Zero DOIs Inventados)."
+  activeDoc="curation"
+>
+  <div class="space-y-6">
+    <div class="border-b border-slate-200 pb-4">
+      <h1 class="text-3xl font-bold font-serif text-slate-900">Guia de Ingestão & Governança de DOIs</h1>
+      <p class="text-slate-500 text-sm mt-1">Como minerar, normalizar e catalogar novos eventos no padrão BRAN Org</p>
+    </div>
+
+    <p class="text-base text-slate-700 leading-relaxed">
+      A integridade científica da BRAN Org se apoia na política de <strong>Fidelidade Estrita aos Dados de Origem</strong>. Qualquer nova submissão deve atender aos requisitos deste guia antes de ser mesclada na organização.
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-2">A Regra de Ouro: Zero DOIs Inventados</h2>
+    <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-950 space-y-2 not-prose">
+      <div class="font-bold text-sm">Política de Identificação Canônica</div>
+      <p class="leading-relaxed">
+        Nunca atribua um prefixo ou sufixo DOI que não tenha sido emitido oficialmente pela Crossref ou Datacite pela instituição promotora. Se o artigo original não tem DOI:
+      </p>
+      <ul class="list-disc list-inside space-y-1 font-mono">
+        <li><code>doi: "N/A"</code></li>
+        <li><code>id: "&lt;evento&gt;-&lt;ano&gt;-&lt;slug_ou_id_origem&gt;"</code> (ex: <code>enancib-2023-gt1-042</code>)</li>
+      </ul>
+    </div>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-4">Etapas de Curadoria de um Novo Evento</h2>
+    <ol class="list-decimal list-inside space-y-3 text-sm text-slate-700 font-sans">
+      <li>
+        <strong>Identificação da Fonte Primária:</strong> Obter a URL oficial do portal OJS ou acervo digital do evento.
+      </li>
+      <li>
+        <strong>Execução do Harvester:</strong> Minerar os artigos via protocolo OAI-PMH ou scraping auditável com extração de metadados completos (autores, afiliações, resumo, palavras-chave e link para o PDF).
+      </li>
+      <li>
+        <strong>Validação de Esquema:</strong> Executar <code>npm run data:validate</code> para certificar que nenhum registro desrespeita o schema <code>article.v1.schema.json</code>.
+      </li>
+      <li>
+        <strong>Cálculo Criptográfico:</strong> Gerar o hash SHA-256 do arquivo JSON final e registrar os metadados no <code>provenance.json</code>.
+      </li>
+      <li>
+        <strong>Abertura de Pull Request:</strong> Submeter o dataset para revisão da equipe no repositório de template ou no repositório filho dedicado.
+      </li>
+    </ol>
+  </div>
+</DocsLayout>

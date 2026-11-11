@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ecosystemData from '../data/ecosystem.json';
+
+const { current_calendar, databases } = ecosystemData;
+
+const months = [
+  { num: 1, name: "Janeiro", databases: ["enancib-open-database", "abec-open-database"], note: "Curadoria final dos anais anuais (ENANCIB e ABEC Meeting)" },
+  { num: 2, name: "Fevereiro", databases: [], note: "Auditoria preventiva e reconciliação com o Zenodo" },
+  { num: 3, name: "Março", databases: [], note: "Revisão de schemas e conformidade com article.v1" },
+  { num: 4, name: "Abril", databases: [], note: "Monitoramento de novas chamadas e publicações" },
+  { num: 5, name: "Maio", databases: [], note: "Auditoria de integridade e links DOI" },
+  { num: 6, name: "Junho", databases: [], note: "Preparação de pipelines para os congressos de meio de ano" },
+  { num: 7, name: "Julho", databases: ["datagramazero-open-database", "cbbd-open-database"], note: "Auditoria DataGramaZero e janela bienal do CBBD (FEBAB)" },
+  { num: 8, name: "Agosto", databases: ["cbbd-open-database"], note: "Extração por eixos temáticos e curadoria pós-CBBD" },
+  { num: 9, name: "Setembro", databases: ["ebbc-open-database"], note: "Verificação dos anais do EBBC (anos pares)" },
+  { num: 10, name: "Outubro", databases: ["ebbc-open-database"], note: "Conclusão de curadoria OAI-PMH e publicação EBBC" },
+  { num: 11, name: "Novembro", databases: [], note: "Auditoria censitária de proveniência criptográfica (CRONA)" },
+  { num: 12, name: "Dezembro", databases: ["enancib-open-database", "abec-open-database"], note: "Abertura da janela de curadoria ENANCIB e ABEC Meeting" }
+];
+---
+
+<Layout 
+  title="Calendário de Curadoria e Governança" 
+  description="Cronograma anual de curadoria, auditoria e atualização das bases de dados abertas da BRAN Org com assinatura iCal."
+  currentPath="/calendario"
+>
+  <div class="bg-[#18181B] text-[#F5F5F4] border-b border-white/10 py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C87D32] mb-2 font-mono">
+          <span>Cronograma & Sincronização</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold font-serif text-[#F5F5F4] tracking-tight">
+          Calendário de Curadoria e Governança
+        </h1>
+        <p class="mt-3 text-base text-stone-300 leading-relaxed font-sans">
+          Ciclos contínuos de verificação, mineração e auditoria das bases científicas da BRAN Org. Cada evento possui janelas pré-definidas para incorporação dos novos anais e geração de cold storage no Zenodo.
+        </p>
+
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <a 
+            href={current_calendar.ics_feed_url} 
+            class="px-4 py-2 rounded-md bg-[#C87D32] text-white text-xs font-bold hover:bg-[#b06a28] transition-colors inline-flex items-center gap-2 shadow-xs"
+            download="bran_curation_calendar.ics"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            Assinar Feed no Google Calendar / Apple Calendar
+          </a>
+          <a 
+            href="https://github.com/BRAN-Org/calendar_config" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="px-4 py-2 rounded-md border border-[#A1A1AA]/40 text-[#F5F5F4] text-xs font-semibold hover:bg-white/10 transition-colors inline-flex items-center gap-1.5"
+          >
+            Repositório calendar_config no GitHub ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Instruções de Assinatura iCal -->
+    <div class="p-6 bg-blue-50/60 rounded-xl border border-blue-200 text-xs text-blue-950 space-y-2 mb-10">
+      <h3 class="font-bold text-sm text-[#004c8c] flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        Como assinar a agenda diretamente no Google Agenda:
+      </h3>
+      <ol class="list-decimal list-inside space-y-1 text-slate-700 font-sans">
+        <li>Abra o <strong>Google Agenda</strong> no seu navegador (<a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="underline font-semibold">calendar.google.com</a>).</li>
+        <li>Na coluna esquerda, em <strong>"Outras agendas"</strong>, clique no botão <strong>+</strong> e selecione <strong>"Do URL"</strong>.</li>
+        <li>Cole a URL canônica: <code class="font-mono bg-white px-2 py-0.5 rounded border border-blue-200 text-slate-900 select-all">{current_calendar.ics_feed_url}</code></li>
+        <li>Clique em <strong>Adicionar agenda</strong>. Você receberá notificações automáticas em cada janela de curadoria.</li>
+      </ol>
+    </div>
+
+    <!-- Grade dos 12 Meses -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold font-serif text-slate-900">
+        Grade Anual de Curadoria (12 Meses)
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {months.map(m => {
+          const isCurrent = m.num === current_calendar.current_month;
+          return (
+            <div class={`rounded-xl border p-5 transition-all ${isCurrent ? 'bg-blue-50/40 border-[#004c8c] ring-1 ring-[#004c8c] shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300'}`}>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <span class="font-serif font-bold text-lg text-slate-900 flex items-center gap-2">
+                  {m.name}
+                  {isCurrent && (
+                    <span class="text-[10px] font-sans font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#092340] text-white">
+                      Mês Atual
+                    </span>
+                  )}
+                </span>
+                <span class="text-xs font-mono text-slate-400">
+                  {String(m.num).padStart(2, '0')}/12
+                </span>
+              </div>
+
+              <div class="mt-3 space-y-2">
+                {m.databases.length > 0 ? (
+                  m.databases.map(dbId => {
+                    const match = databases.find(d => d.id === dbId);
+                    return (
+                      <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+                        <div class="font-bold text-slate-900 flex items-center justify-between">
+                          <span>{match?.sigla || dbId}</span>
+                          <span class="font-mono text-[10px] text-slate-500">{match?.cadence === 'annual' ? 'Anual' : 'Bienal'}</span>
+                        </div>
+                        <div class="text-[11px] text-slate-600 truncate mt-0.5">{match?.name}</div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div class="py-3 text-xs text-slate-400 italic">
+                    Auditoria e manutenção regular
+                  </div>
+                )}
+              </div>
+
+              <p class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 leading-relaxed">
+                {m.note}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</Layout>

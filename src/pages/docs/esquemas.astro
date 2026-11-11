@@ -1,0 +1,63 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout 
+  title="Esquemas JSON Canônicos" 
+  description="Definição dos esquemas canônicos de validação da BRAN Org: article.v1 e provenance.v1."
+  activeDoc="schemas"
+>
+  <div class="space-y-6">
+    <div class="border-b border-slate-200 pb-4">
+      <h1 class="text-3xl font-bold font-serif text-slate-900">Esquemas JSON Canônicos</h1>
+      <p class="text-slate-500 text-sm mt-1">Especificações rigorosas de interoperabilidade e integridade</p>
+    </div>
+
+    <p class="text-base text-slate-700 leading-relaxed">
+      Todos os conjuntos de dados da BRAN Org devem validar sem nenhum aviso contra as versões canônicas dos esquemas mantidos no repositório <a href="https://github.com/BRAN-Org/schemas" target="_blank" rel="noopener noreferrer" class="text-[#004c8c] underline">BRAN-Org/schemas</a>.
+    </p>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-2">1. Esquema do Artigo (`article.v1.schema.json`)</h2>
+    <p class="text-xs text-slate-600">Representação de cada trabalho científico, artigo ou resumo publicado em anais ou periódicos:</p>
+
+    <div class="p-4 bg-slate-900 text-slate-100 rounded-lg font-mono text-xs overflow-x-auto not-prose">
+      <pre><code>&#123;
+  "id": "ebbc-2024-001",
+  "title": "Análise Cientométrica da Produção Científica Brasileira",
+  "authors": [
+    &#123;
+      "name": "Maria Silva",
+      "affiliation": "Universidade de São Paulo (USP)",
+      "orcid": "0000-0002-1825-0097"
+    &#125;
+  ],
+  "year": 2024,
+  "event": "EBBC - Encontro Brasileiro de Bibliometria e Cientometria",
+  "track": "GT1 - Métodos Quantitativos e Altmetria",
+  "doi": "10.1234/ebbc.2024.001",   // ou "N/A" se inexistente na origem
+  "abstract": "Texto integral do resumo submetido...",
+  "keywords": ["cientometria", "bibliometria", "ciência aberta"],
+  "pdf_url": "https://ebbc.inf.br/index.php/ebbc/article/view/123/456.pdf",
+  "landing_page_url": "https://ebbc.inf.br/index.php/ebbc/article/view/123"
+&#125;</code></pre>
+    </div>
+
+    <h2 class="text-xl font-bold font-serif text-slate-900 pt-4">2. Esquema de Proveniência (`provenance.v1.schema.json`)</h2>
+    <p class="text-xs text-slate-600">Registro criptográfico que acompanha todo dataset na raiz de seu repositório:</p>
+
+    <div class="p-4 bg-slate-900 text-slate-100 rounded-lg font-mono text-xs overflow-x-auto not-prose">
+      <pre><code>&#123;
+  "dataset_id": "ebbc-open-database-v1",
+  "source_url": "https://ebbc.inf.br",
+  "scraped_at": "2026-11-05T09:47:00Z",
+  "extractor_name": "ebbc_oai_harvester_v2",
+  "raw_data_sha256": "421e6bcf979b0f9c731d6deb4aea9653555324f44f1f532b27ad524dac6100d1",
+  "health_level": "HIGH_FIDELITY",
+  "total_records": 808,
+  "missing_doi_count": 225,
+  "doi_resolution_rate": 1.0,
+  "global_identification_rate": 1.0
+&#125;</code></pre>
+    </div>
+  </div>
+</DocsLayout>
