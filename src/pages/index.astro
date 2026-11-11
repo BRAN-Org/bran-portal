@@ -211,16 +211,8 @@ const searchIndex = search_index;
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
       
-      <!-- Legenda Científica Discreta Estilo OWID / Nature Index -->
-      <div class="inline-flex items-center gap-3 px-3 py-1 bg-black/40 border border-white/10 rounded-full text-[10px] font-mono text-[#A1A1AA] mb-4 backdrop-blur-xs">
-        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#C87D32]"></span> Nós de Autor / Artigo</span>
-        <span class="hidden sm:inline-flex items-center gap-1.5"><span class="w-3.5 h-[1.5px] bg-[#A1A1AA]/70"></span> Coautoria</span>
-        <span class="inline-flex items-center gap-1.5"><span class="w-3.5 border-b border-dashed border-[#C87D32]"></span> Citação Científica ⇢</span>
-      </div>
-
       <!-- Headline Editorial Dourado/Bronze (#C87D32) -->
       <h1 class="text-3xl sm:text-5xl font-bold font-serif text-[#F5F5F4] leading-[1.18] tracking-tight">
-
         Dados e pesquisas para resgatar e preservar a <span class="text-[#C87D32] italic">memória científica</span> brasileira.
       </h1>
 
@@ -235,7 +227,7 @@ const searchIndex = search_index;
         <div class="relative flex items-center">
           <input 
             type="text" 
-            id="hero-search-input"
+            id="hero-search-input" 
             placeholder='Buscar periódico ou evento: "DataGramaZero", "ENANCIB", "EBBC", "CBBD", "SNBU"...' 
             class="w-full pl-5 pr-12 py-3.5 sm:py-4 text-sm sm:text-base text-[#18181B] bg-[#F5F5F4] rounded-md shadow-2xl focus:outline-none focus:ring-2 focus:ring-[#C87D32] focus:bg-white font-sans transition-all placeholder:text-[#A1A1AA]"
             autocomplete="off"
@@ -251,32 +243,27 @@ const searchIndex = search_index;
         </div>
       </div>
 
-      <!-- AS 4 BOLINHAS DE INDICADORES QUANTITATIVOS (Paleta Graphite, Bronze e Muted) -->
-      <div class="mt-7 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-[#F5F5F4]">
-        <!-- Bolinha 1: Artigos Catalogados -->
-        <a href="/databases" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors">
-          <svg class="w-3.5 h-3.5 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-          <span>{metrics.total_records.toLocaleString('pt-BR')} artigos catalogados</span>
+      <!-- INDICADORES QUANTITATIVOS COMPACTOS E ALINHADOS (Paleta Graphite, Bronze e Muted) -->
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs text-[#F5F5F4]">
+        <!-- Bolinha 1: Total de Artigos -->
+        <a href="/databases" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors">
+          <svg class="w-3 h-3 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <span>{metrics.total_records.toLocaleString('pt-BR')} artigos</span>
         </a>
 
-        <!-- Bolinha 2: Eventos / Conferências -->
-        <a href="/databases?type=Conferência" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors">
-          <svg class="w-3.5 h-3.5 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        <!-- Bolinha 2: Eventos Científicos -->
+        <a href="/databases?type=Conferência" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors">
+          <svg class="w-3 h-3 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
           <span>{metrics.total_conferences} eventos científicos</span>
         </a>
 
-        <!-- Bolinha 3: Periódicos -->
-        <a href="/databases?type=Periódico" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors">
-          <svg class="w-3.5 h-3.5 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        <!-- Bolinha 3: Periódicos Preservados -->
+        <a href="/databases?type=Periódico" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors">
+          <svg class="w-3 h-3 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
           <span>{metrics.total_journals} periódico preservado</span>
         </a>
-
-        <!-- Bolinha 4: 100% Auditado SHA-256 (Bronze Accent) -->
-        <a href="/docs/protocolo-crona" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 hover:border-[#C87D32] border border-white/15 backdrop-blur-xs font-mono transition-colors" title="Auditado pelo protocolo CRONA com SHA-256 e zero identificadores artificiais">
-          <svg class="w-3.5 h-3.5 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          <span>100% auditado (SHA-256)</span>
-        </a>
       </div>
+
 
       <!-- Subtexto com Muted Gray -->
       <div class="mt-4 text-[11px] text-[#A1A1AA] font-sans tracking-wide">
