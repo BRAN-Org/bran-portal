@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bronze: #C87D32;
+    --color-graphite: #18181B;
+    --color-offwhite: #F5F5F4;
+    --color-muted: #A1A1AA;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #18181B;
+    background-color: #F5F5F4;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-serif-owid {
+    font-family: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F5F4;
+}
+::-webkit-scrollbar-thumb {
+  background: #A1A1AA;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C87D32;
+}
+
+/* Animações Vetoriais de Citações e Redes Cientométricas */
+@keyframes citationFlow {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nodePulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes haloWave {
+  0% {
+    r: 6px;
+    opacity: 0.7;
+  }
+  100% {
+    r: 22px;
+    opacity: 0;
+  }
+}
+
+.citation-flow-line {
+  stroke-dasharray: 6 8;
+  animation: citationFlow 6s linear infinite;
+}
+
+.citation-flow-fast {
+  stroke-dasharray: 4 6;
+  animation: citationFlow 3.5s linear infinite;
+}
+
+.node-hub-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nodePulseGlow 3.5s ease-in-out infinite;
+}
+
+.halo-wave {
+  animation: haloWave 3.2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
