@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadData } from './src/dataManager.js';
@@ -19,21 +20,30 @@ app.use(express.json());
 // Carregar dataset em memória no boot
 loadData();
 
-// Servir arquivos estáticos do Dashboard (public/)
-app.use(express.static(join(__dirname, 'public')));
+// Determinar diretório estático (prioriza build do Astro em dist/, fallback para public/)
+const staticDir = existsSync(join(__dirname, 'dist')) ? join(__dirname, 'dist') : join(__dirname, 'public');
 
-// Montar rotas da API REST
+
+// Servir arquivos estáticos do Portal
+app.use(express.static(staticDir, { extensions: ['html'] }));
+
+// Montar rotas da API REST pública
 const apiRouter = createApiRouter();
 app.use('/api/v1', apiRouter);
 app.use('/api', apiRouter); // Alias de compatibilidade rápida
 
-// Fallback para a SPA / Dashboard no root
+// Fallback para rotas limpas e páginas do Portal
 app.use((req, res) => {
   if (req.path.startsWith('/api')) {
-    return res.status(404).json({ error: 'Endpoint não encontrado' });
+    return res.status(404).json({ error: 'Endpoint da API não encontrado' });
   }
-  res.sendFile(join(__dirname, 'public/index.html'));
+  const cleanPath = join(staticDir, req.path.replace(/\/$/, ''), 'index.html');
+  if (existsSync(cleanPath)) {
+    return res.sendFile(cleanPath);
+  }
+  res.sendFile(join(staticDir, 'index.html'));
 });
+
 
 // Inicializar Servidor em modo local
 if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
