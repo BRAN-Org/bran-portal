@@ -4,6 +4,23 @@ Este documento detalha a arquitetura, arquivos criados e funcionalidades impleme
 
 ---
 
+## [2.0.0] - 2026-11-12 (Renomeação para BRAN Portal, Arquitetura Jamstack com Astro 7, Redesign Editorial OWID e Rede Cientométrica)
+
+### Feat
+- **Migração para Astro 7 SSG + Tailwind CSS v4**: Compilação estática de 11 páginas de alta performance com tempos de build sub-segundo, tipografia serifada e layout responsivo.
+- **Redesign Editorial Estilo Our World in Data (OWID)**:
+  - Hero com fundo grafite `#242429` diferenciado da navbar, rede vetorial cientométrica de coautoria e citações com clusterização tipo VOSviewer/Gephi e máscara de vinheta central.
+  - Grade editorial compacta de 4 colunas com cards de artigos enquadrados, indicadores de tempo de leitura, coluna de Updates & Acervos e newsletter expandida em 3 tiers com alinhamento vertical balanceado.
+  - Indicadores enxutos no Hero (11.937 artigos, 4 eventos científicos, 1 periódico preservado).
+- **Renomeação do Repositório Canônico**: Transição de template para o portal oficial unificado `BRAN-Org/bran-portal`.
+- **API REST Unificada & Endpoints Federados**: Suporte a rotas com escopo por base (`/api/v1/:database/articles`), exportação streaming em CSV/BibTeX/RIS/JSON e especificações OpenAPI 3.0.
+
+### Test & CI
+- **Suite de Testes Automatizados**: 36 testes integrados cobrindo endpoints REST (14 testes), integridade dos dados e agregação do ecossistema (6 testes) e regras de negócio da engine (16 testes).
+- **Validação de CI com Download Automatizado**: Workflow do GitHub Actions com pre-fetch de datasets para validação empírica rigorosa.
+
+---
+
 ## [1.6.0] - 2026-11-05 (Exportação Bibliográfica Avançada, Correção de Paginação e Priorização de Identificadores)
 
 ### Feat
