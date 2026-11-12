@@ -645,7 +645,7 @@ const searchIndex = search_index;
         <!-- Caixa Enquadrada da Newsletter Estilo OWID -->
         <div id="newsletter" class="bg-white border border-stone-200/90 rounded-md p-4 sm:p-5 flex flex-col justify-between shadow-xs">
           <div>
-            <div class="flex items-center gap-2.5 mb-1.5">
+            <div class="flex items-center gap-2.5 mb-2">
               <div class="w-8 h-8 rounded-md bg-[#18181B] text-[#F5F5F4] flex items-center justify-center shrink-0">
                 <svg class="w-4 h-4 text-[#C87D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </div>
@@ -654,26 +654,51 @@ const searchIndex = search_index;
               </h3>
             </div>
 
-            <p class="text-xs text-stone-600 mb-3 leading-relaxed font-sans">
-              Receba nossos relatos de curadoria e novidades dos acervos por e-mail.
+            <p class="text-xs sm:text-[13px] text-stone-600 mb-3.5 leading-relaxed font-sans">
+              Receba análises cientométricas, relatórios de curadoria e notificações de novos acervos históricos recuperados diretamente no seu e-mail acadêmico.
             </p>
 
-            <form id="newsletter-form" class="space-y-2.5">
-              <label class="flex items-start gap-2 text-xs text-[#18181B] cursor-pointer">
+            <form id="newsletter-form" class="space-y-3">
+              <label class="flex items-start gap-2.5 text-xs text-[#18181B] cursor-pointer group">
                 <input type="checkbox" checked class="mt-0.5 rounded text-[#C87D32] focus:ring-[#C87D32]" />
-                <div>
-                  <strong class="text-[#18181B] block font-sans text-xs">The BRAN Brief <span class="text-[#A1A1AA] font-normal text-[11px]">(Quinzenal)</span></strong>
+                <div class="space-y-0.5">
+                  <div class="flex items-center gap-1.5">
+                    <strong class="text-[#18181B] font-sans text-xs font-semibold group-hover:text-[#C87D32] transition-colors">The BRAN Brief</strong>
+                    <span class="text-stone-400 font-normal text-[11px]">(Quinzenal)</span>
+                  </div>
+                  <p class="text-[11.5px] text-stone-600 leading-snug font-sans">
+                    Destaques da Ciência da Informação, resgate de anais históricos e sínteses quantitativas da produção científica brasileira.
+                  </p>
                 </div>
               </label>
 
-              <label class="flex items-start gap-2 text-xs text-[#18181B] cursor-pointer">
+              <label class="flex items-start gap-2.5 text-xs text-[#18181B] cursor-pointer group">
                 <input type="checkbox" checked class="mt-0.5 rounded text-[#C87D32] focus:ring-[#C87D32]" />
-                <div>
-                  <strong class="text-[#18181B] block font-sans text-xs">Data Releases &amp; Zenodo <span class="text-[#A1A1AA] font-normal text-[11px]">(Eventual)</span></strong>
+                <div class="space-y-0.5">
+                  <div class="flex items-center gap-1.5">
+                    <strong class="text-[#18181B] font-sans text-xs font-semibold group-hover:text-[#C87D32] transition-colors">Data Releases &amp; Zenodo</strong>
+                    <span class="text-stone-400 font-normal text-[11px]">(Mensal)</span>
+                  </div>
+                  <p class="text-[11.5px] text-stone-600 leading-snug font-sans">
+                    Avisos imediatos sobre novos datasets públicos auditados, dumps SQLite/CSV, metadados CrossRef e depósitos no Zenodo.
+                  </p>
                 </div>
               </label>
 
-              <div class="pt-0.5">
+              <label class="flex items-start gap-2.5 text-xs text-[#18181B] cursor-pointer group">
+                <input type="checkbox" checked class="mt-0.5 rounded text-[#C87D32] focus:ring-[#C87D32]" />
+                <div class="space-y-0.5">
+                  <div class="flex items-center gap-1.5">
+                    <strong class="text-[#18181B] font-sans text-xs font-semibold group-hover:text-[#C87D32] transition-colors">Prazos &amp; Chamadas</strong>
+                    <span class="text-stone-400 font-normal text-[11px]">(Eventual)</span>
+                  </div>
+                  <p class="text-[11.5px] text-stone-600 leading-snug font-sans">
+                    Notificações de abertura de submissões, prazos do calendário acadêmico e novas adesões institucionais à rede.
+                  </p>
+                </div>
+              </label>
+
+              <div class="pt-1 space-y-2">
                 <input 
                   type="email" 
                   id="newsletter-email" 
@@ -681,22 +706,21 @@ const searchIndex = search_index;
                   placeholder="Seu melhor e-mail acadêmico..." 
                   class="w-full px-3 py-2 text-xs bg-[#FAFAF9] border border-stone-300 rounded text-[#18181B] focus:outline-none focus:ring-2 focus:ring-[#C87D32] focus:bg-white placeholder:text-stone-400 font-sans"
                 />
+                <button 
+                  type="submit" 
+                  class="w-full py-2.5 px-3 text-xs font-bold rounded bg-[#C87D32] hover:bg-[#b06a28] text-white transition-colors cursor-pointer shadow-xs font-sans"
+                >
+                  Inscrever-se gratuitamente
+                </button>
               </div>
-
-              <button 
-                type="submit" 
-                class="w-full py-2 px-3 text-xs font-bold rounded bg-[#C87D32] hover:bg-[#b06a28] text-white transition-colors cursor-pointer shadow-xs font-sans"
-              >
-                Inscrever-se
-              </button>
             </form>
 
             <div id="newsletter-success" class="hidden mt-2 p-1.5 bg-[#C87D32]/10 border border-[#C87D32]/40 text-[#C87D32] text-xs rounded text-center font-bold">
               ✓ Inscrição confirmada!
             </div>
 
-            <div class="mt-2 text-[10px] text-stone-500 text-center leading-tight">
-              Termos de privacidade e ciência aberta da BRAN.
+            <div class="mt-2.5 text-[10.5px] text-stone-500 text-center leading-normal">
+              Ao assinar você concorda com nossos <a href="/docs" class="underline hover:text-stone-700">termos de transparência e ciência aberta</a>. Cancele quando quiser.
             </div>
           </div>
         </div>
